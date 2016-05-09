@@ -25,6 +25,7 @@ public class WordCountApp {
 
         //1. 数据来源
         FileInputFormat.setInputPaths(job, args[0]);
+        FileInputFormat.setInputDirRecursive(job, true); //递归
 
         //2. 使用Mapper计算
         job.setMapperClass(MapTest.class);
