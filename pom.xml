@@ -170,6 +170,13 @@
             <artifactId>twill-yarn</artifactId>
             <version>0.7.0-incubating</version>
         </dependency>-->
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.9</version>
+        </dependency>
+
     </dependencies>
 
 </project>
