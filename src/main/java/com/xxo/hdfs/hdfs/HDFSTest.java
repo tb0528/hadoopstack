@@ -22,7 +22,7 @@ public class HDFSTest {
         FileSystem fs = FileSystem.newInstance(conf);
 
 //        listStatus(fs);
-//        create(conf, fs);
+        create(conf, fs);
 
 //        open(conf, fs);
 
@@ -48,9 +48,9 @@ public class HDFSTest {
      */
     private static void create(Configuration conf, FileSystem fs) throws IOException {
         //1. 上传数据 - 一个FSDataOutputStream
-        FSDataOutputStream creStream = fs.create(new Path("/blog"));
+        FSDataOutputStream creStream = fs.create(new Path("/aaaa/123.txt"));
         //2. 读入数据源
-        FileInputStream fin = new FileInputStream("F:\\package.json");
+        FileInputStream fin = new FileInputStream("F:\\123.txt");
 
         //3. 复制数据
         IOUtils.copyBytes(fin, creStream, conf, true);
