@@ -31,6 +31,8 @@ public class DisSame {
         Job job = Job.getInstance(new Configuration(), DisSame.class.getName());
         job.setJarByClass(DisSame.class);
 
+        //job.setInputFormatClass();
+
         //设置Reduce数量和分区类
         job.setNumReduceTasks( Integer.valueOf(args[2]) );
         job.setPartitionerClass(MyPartition.class);
@@ -52,6 +54,8 @@ public class DisSame {
         //4. 写入数据
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
+//        job.setInputFormatClass();
+//        job.setOutputFormatClass();
         //5. 执行
         job.waitForCompletion(true) ;
 

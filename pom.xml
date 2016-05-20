@@ -8,6 +8,7 @@
     <artifactId>HadoopStudy_20160509</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>HadoopStudy_20160509</name>
+    <packaging>jar</packaging>
 
     <dependencies>
 
@@ -68,108 +69,6 @@
             <version>2.6.0</version>
         </dependency>
 
-<!--
-        &lt;!&ndash; avro 依赖 &ndash;&gt;
-        <dependency>
-            <groupId>org.apache.avro</groupId>
-            <artifactId>avro</artifactId>
-            <version>1.8.0</version>
-        </dependency>
-
-        &lt;!&ndash; hbase 依赖 &ndash;&gt;
-        <dependency>
-            <groupId>org.apache.hbase</groupId>
-            <artifactId>hbase-client</artifactId>
-            <version>0.98.12-hadoop2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.hbase</groupId>
-            <artifactId>hbase-server</artifactId>
-            <version>0.98.12-hadoop2</version>
-        </dependency>
-
-        &lt;!&ndash; hive 依赖  &ndash;&gt;
-        <dependency>
-            <groupId>org.apache.hive</groupId>
-            <artifactId>hive-exec</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hive</groupId>
-            <artifactId>hive-serde</artifactId>
-            <version>0.14.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hive</groupId>
-            <artifactId>hive-service</artifactId>
-            <version>0.14.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hive</groupId>
-            <artifactId>hive-metastore</artifactId>
-            <version>0.14.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hive</groupId>
-            <artifactId>hive-common</artifactId>
-            <version>0.14.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hive</groupId>
-            <artifactId>hive-cli</artifactId>
-            <version>0.14.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hive</groupId>
-            <artifactId>hive-jdbc</artifactId>
-            <version>0.14.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hive</groupId>
-            <artifactId>hive-hbase-handler</artifactId>
-            <version>0.14.0</version>
-        </dependency>
-
-
-        &lt;!&ndash; kafka 依赖  &ndash;&gt;
-        <dependency>
-            <groupId>org.apache.kafka</groupId>
-            <artifactId>kafka_2.10</artifactId>
-            <version>0.8.2.0</version>
-        </dependency>
-
-        &lt;!&ndash; akka 依赖 &ndash;&gt;
-        <dependency>
-            <groupId>com.typesafe.akka</groupId>
-            <artifactId>akka-actor_2.10</artifactId>
-            <version>2.3.2</version>
-        </dependency>
-
-        &lt;!&ndash; scala 依赖 &ndash;&gt;
-        <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-library</artifactId>
-            <version>2.10.3</version>
-        </dependency>
-
-        &lt;!&ndash; flink <dependency> <groupId>org.apache.flink</groupId> <artifactId>flink-java</artifactId>
-            <version>0.10.1</version> </dependency> <dependency> <groupId>org.apache.flink</groupId>
-            <artifactId>flink-streaming-java</artifactId> <version>0.10.1</version> </dependency>
-            <dependency> <groupId>org.apache.flink</groupId> <artifactId>flink-clients</artifactId>
-            <version>0.10.1</version> </dependency> &ndash;&gt;
-
-        &lt;!&ndash; twill 依赖 &ndash;&gt;
-        <dependency>
-            <groupId>org.apache.twill</groupId>
-            <artifactId>twill-api</artifactId>
-            <version>0.7.0-incubating</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.twill</groupId>
-            <artifactId>twill-yarn</artifactId>
-            <version>0.7.0-incubating</version>
-        </dependency>-->
 
         <dependency>
             <groupId>org.apache.poi</groupId>
@@ -177,6 +76,60 @@
             <version>3.9</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.mrunit</groupId>
+            <artifactId>mrunit</artifactId>
+            <version>1.0.0</version>
+            <classifier>hadoop2</classifier>
+            <scope>test</scope>
+        </dependency>
+
+
+        <!-- http://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+
+
     </dependencies>
+
+
+    <build>
+
+        <!-- 源目录 -->
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <testSourceDirectory>src/test/java</testSourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+
+        <!-- 插件 -->
+        <plugins>
+
+            <!-- 打包插件  -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <!-- execution元素包含了插件执行需要的信息 -->
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

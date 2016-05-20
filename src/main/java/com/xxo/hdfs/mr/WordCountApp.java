@@ -1,6 +1,7 @@
 package com.xxo.hdfs.mr;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -11,6 +12,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
+import java.net.URI;
 
 /**
  * 通过MapReduce统计单词次数
@@ -19,8 +21,8 @@ import java.io.IOException;
 public class WordCountApp {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
-
-        Job job = Job.getInstance(new Configuration() ,WordCountApp.class.getSimpleName()) ;
+        Configuration conf = new Configuration();
+        Job job = Job.getInstance( conf,WordCountApp.class.getSimpleName()) ;
         job.setJarByClass(WordCountApp.class);
 
         //1. 数据来源
@@ -28,12 +30,12 @@ public class WordCountApp {
         FileInputFormat.setInputDirRecursive(job, true); //递归
 
         //2. 使用Mapper计算
-        job.setMapperClass(MapTest.class);
+        job.setMapperClass(WordCountMapper.class);
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(LongWritable.class);
 
         //3. 使用Reducer合并计算
-        job.setReducerClass(ReduceTest.class);
+        job.setReducerClass(WordCountReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(LongWritable.class);
 
@@ -51,7 +53,7 @@ public class WordCountApp {
      * K2 : 单词
      * V2 : 次数
      */
-    public static class MapTest extends Mapper<LongWritable,Text,Text,LongWritable> {
+    public static class WordCountMapper extends Mapper<LongWritable,Text,Text,LongWritable> {
 
         Text k2 = new Text() ;
         LongWritable v2 = new LongWritable();
@@ -82,7 +84,7 @@ public class WordCountApp {
      * K2 : 字符串
      * V2 : 次数（统计总的）
      */
-    public static class ReduceTest extends Reducer<Text , LongWritable ,Text ,LongWritable>{
+    public static class WordCountReducer extends Reducer<Text , LongWritable ,Text ,LongWritable>{
 
         //K1 = K3
         LongWritable v3 = new LongWritable() ;

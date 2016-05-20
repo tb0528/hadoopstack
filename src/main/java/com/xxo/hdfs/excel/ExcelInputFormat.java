@@ -11,9 +11,14 @@ import org.apache.hadoop.mapreduce.RecordReader;
 import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.FileSplit;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Iterator;
 
 /**
  * Created by xiaoxiaomo on 2016/5/10.
@@ -46,7 +51,7 @@ public class ExcelInputFormat extends FileInputFormat<LongWritable,Text>{
 			FSDataInputStream fileIn = fs.open(split.getPath());
 
             inputStream = fileIn;
-			String line = new ExcelParser().parseExcelData(inputStream);
+			String line = ExcelParser.parseExcelData(inputStream);
 			this.strArrayofLines = line.split("\n");
 		}
 
@@ -100,4 +105,63 @@ public class ExcelInputFormat extends FileInputFormat<LongWritable,Text>{
 			}
 		}
 	}
+
+    public static class ExcelParser {
+        public static String parseExcelData(InputStream input) {
+            StringBuilder sb = null;
+            try {
+                //1. 实例化一个HSSFWorkbook
+                HSSFWorkbook workbook = new HSSFWorkbook(input);
+
+                //2. 读取第一个Sheet
+                HSSFSheet sheet = workbook.getSheetAt(0);
+
+                //3. 遍历sheet的行
+                Iterator<Row> rowIterator = sheet.iterator();
+                sb = new StringBuilder();
+                Row row = null;
+                while (rowIterator.hasNext()) {
+                    row = rowIterator.next();
+
+                    //3. 获取每一个Cell
+                    Iterator<Cell> cellIterator = row.cellIterator();
+
+                    //4. 遍历每一个Cell
+                    Cell cell = null;
+                    while (cellIterator.hasNext()) {
+                        cell = cellIterator.next();
+
+                        //5. 转化类型
+                        switch (cell.getCellType()) {
+                            case Cell.CELL_TYPE_BOOLEAN:
+                                sb.append(cell.getBooleanCellValue() + "\t");
+                                break;
+
+                            case Cell.CELL_TYPE_NUMERIC:
+                                sb.append(cell.getNumericCellValue() + "\t");
+                                break;
+
+                            case Cell.CELL_TYPE_STRING:
+                                sb.append(cell.getStringCellValue() + "\t");
+                                break;
+
+                        }
+                    }
+                    sb.append("\n");
+                }
+
+            } catch (IOException _ex) {
+                System.out.println("IO 异常！ " + _ex);
+            } finally {
+                try {
+                    if (input != null)
+                        input.close();
+                } catch (IOException _ex) {
+                    System.out.println("关闭IO 异常！ " + _ex);
+                }
+            }
+            return sb.toString();
+
+        }
+    }
 }

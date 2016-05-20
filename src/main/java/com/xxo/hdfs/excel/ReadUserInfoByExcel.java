@@ -27,6 +27,7 @@ public class ReadUserInfoByExcel {
 
         //1. 数据来源
         FileInputFormat.setInputPaths(job, args[0]);
+//        FileInputFormat.setInputDirRecursive();
 
         //2. 调用map
         job.setMapperClass(SortMap.class);
