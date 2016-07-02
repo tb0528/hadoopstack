@@ -12,7 +12,7 @@ import java.net.URISyntaxException;
  * HDFSTest 测试
  * 一些简单的HDFS操作
  * 查看、上传、下载
- * Created by xiaoxiaomo on 2016/5/9.
+ * Created by xiaoxiaomo on 2014/5/9.
  */
 public class HDFSTest {
 
