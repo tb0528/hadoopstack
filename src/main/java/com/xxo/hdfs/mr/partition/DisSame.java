@@ -5,20 +5,18 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapred.InvalidInputException;
-import org.apache.hadoop.mapreduce.Partitioner;
 import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.Partitioner;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-import javax.imageio.metadata.IIOInvalidTreeException;
 import java.io.IOException;
 
 /**
  * Reduce 分区计算
- * Created by xiaoxiaomo on 2016/5/10.
+ * Created by xiaoxiaomo on 2014/5/10.
  */
 public class DisSame {
 

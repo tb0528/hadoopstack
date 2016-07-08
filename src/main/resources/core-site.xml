@@ -5,11 +5,11 @@
 <configuration>
     <property>
         <name>fs.defaultFS</name>
-        <value>hdfs://xxo:9000</value>
+        <value>hdfs://xxo07:9000</value>
     </property>
     <property>
         <name>hadoop.tmp.dir</name>
-        <value>/usr/local/hadoop_repo/tmp</value>    
+        <value>/usr/local/hadoop_repo/tmp</value>
 	</property>
 
 	<!--

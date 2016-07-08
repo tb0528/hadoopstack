@@ -9,7 +9,7 @@ import java.io.IOException;
  * org.apache.hadoop.conf.Configuration
  * 如果core-site里面没有配置，就会去加载默认的配置文件
  * 默认配置文件：core-default.xml
- * Created by xiaoxiaomo on 2016/5/9.
+ * Created by xiaoxiaomo on 2014/5/9.
  */
 public class ConfigurationTest {
 

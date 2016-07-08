@@ -16,7 +16,7 @@ import java.io.IOException;
 /**
  * 获取手机号，并排序
  * 默认字典排序（升序）
- * Created by xiaoxiaomo on 2016/5/10.
+ * Created by xiaoxiaomo on 2014/5/10.
  */
 public class SortMobileDesc {
 

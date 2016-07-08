@@ -1,7 +1,6 @@
 package com.xxo.hdfs.mr;
 
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -9,14 +8,14 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
-import java.net.URI;
 
 /**
  * 通过MapReduce统计单词次数
- * Created by xiaoxiaomo on 2016/5/9.
+ * Created by xiaoxiaomo on 2014/5/9.
  */
 public class WordCountApp {
 
@@ -31,6 +30,7 @@ public class WordCountApp {
 
         //2. 使用Mapper计算
         job.setMapperClass(WordCountMapper.class);
+        job.setInputFormatClass(TextInputFormat.class);
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(LongWritable.class);
 
@@ -59,16 +59,15 @@ public class WordCountApp {
         LongWritable v2 = new LongWritable();
 
         @Override
-        protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+        protected void map(LongWritable key, Text value, Context context)
+                throws IOException, InterruptedException {
 
             //1. 获取行信息
             String line = value.toString();
-            System.out.println( "该行数据："+line );
 
             //2. 获取行的所用单词
             String[] words = line.split("\t");
             for (String word : words) {
-                System.out.println( " 设置的键和值："+word+" - 1" );
                 k2.set(word.getBytes()) ; //设置键
                 v2.set(1);                //设置值
                 context.write(k2,v2);
@@ -79,22 +78,20 @@ public class WordCountApp {
 
     /**
      * 自定义的Reduce 需要继承Reducer
-     * K1 : 字符串
-     * V1 : 次数（分组）
      * K2 : 字符串
-     * V2 : 次数（统计总的）
+     * V3 : 次数（分组）
+     * K3 : 字符串
+     * V3 : 次数（统计总的）
      */
-    public static class WordCountReducer extends Reducer<Text , LongWritable ,Text ,LongWritable>{
+    public static class WordCountReducer extends Reducer<Text,LongWritable,Text,LongWritable>{
 
-        //K1 = K3
         LongWritable v3 = new LongWritable() ;
+        int sum  = 0 ;
         @Override
-        protected void reduce(Text key, Iterable<LongWritable> values, Context context) throws IOException, InterruptedException {
-            int sum = 0 ;
-
-            System.out.println( "Reduce 键key："+key);
+        protected void reduce(Text key, Iterable<LongWritable> values, Context context)
+                throws IOException, InterruptedException {
+            sum = 0 ;
             for (LongWritable value : values) {
-                System.out.println(" 设置的值："+value);
                 sum +=value.get() ;
             }
             v3.set(sum);

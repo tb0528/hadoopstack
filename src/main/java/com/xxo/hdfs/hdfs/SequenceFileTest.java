@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  *
  * 使用SequenceFile 存储小文件
- * Created by xiaoxiaomo on 2016/5/9.
+ * Created by xiaoxiaomo on 2014/5/9.
  */
 public class SequenceFileTest {
 

@@ -21,8 +21,8 @@ public class HDFSTest {
         Configuration conf = new Configuration();
         FileSystem fs = FileSystem.newInstance(conf);
 
-//        listStatus(fs);
-        create(conf, fs);
+        listStatus(fs); //List列表
+//        create(conf, fs);
 
 //        open(conf, fs);
 

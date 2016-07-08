@@ -17,7 +17,7 @@ import java.io.IOException;
 /**
  * 解析手机流量，并统计信息
  * 使用 ArrayWritable
- * Created by xiaoxiaomo on 2016/5/10.
+ * Created by xiaoxiaomo on 2014/5/10.
  */
 public class TrafficArrayWritable {
 

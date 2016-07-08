@@ -21,7 +21,7 @@ import java.io.InputStream;
 import java.util.Iterator;
 
 /**
- * Created by xiaoxiaomo on 2016/5/10.
+ * Created by xiaoxiaomo on 2014/5/10.
  */
 public class ExcelInputFormat extends FileInputFormat<LongWritable,Text>{
 
