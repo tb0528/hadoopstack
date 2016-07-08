@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.xxo</groupId>
-    <artifactId>HadoopStudy_20160509</artifactId>
+    <artifactId>HadoopTouch_20140209</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>HadoopStudy_20160509</name>
+    <name>HadoopTouch_20140209</name>
     <packaging>jar</packaging>
 
     <dependencies>
