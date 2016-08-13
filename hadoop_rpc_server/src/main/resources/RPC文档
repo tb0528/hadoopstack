@@ -1,0 +1,4 @@
+1. 发布服务端服务
+java -cp hadoop_rpc_server-1.0-SNAPSHOT-jar-with-dependencies.jar com.xxo.rpc.PublishServer
+
+2. 运行客户端controller

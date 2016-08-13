@@ -1,6 +1,6 @@
-package com.xxo.rpc.service.imp;
+package com.xxo.rpc.imp;
 
-import com.xxo.rpc.service.LoginServiceInterface;
+import com.xxo.rpc.LoginServiceInterface;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +12,7 @@ public class LoginServiceImp implements LoginServiceInterface{
     private static final Logger logger = LoggerFactory.getLogger( LoginServiceImp.class ) ;
     @Override
     public String login(String username, String password) {
-        logger.info( username + " login !~~~~~~~~~~~~~" );
+        logger.debug( username + " login !~~~~~~~~~~~~~" );
         return "login success :" + username ;
     }
 }

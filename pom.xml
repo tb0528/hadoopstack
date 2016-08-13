@@ -10,6 +10,8 @@
     <modules>
         <module>hadoop_basic_touch</module>
         <module>hadoop_practice</module>
+        <module>hadoop_rpc_server</module>
+        <module>hadoop_rpc_client</module>
     </modules>
     <name>HadoopTouch_20140209</name>
     <packaging>pom</packaging>
