@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.xxo</groupId>
-    <artifactId>HadoopTouch_20140209</artifactId>
+    <artifactId>hadoopstack</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>hadoop_basic_touch</module>
@@ -13,7 +13,7 @@
         <module>hadoop_rpc_server</module>
         <module>hadoop_rpc_client</module>
     </modules>
-    <name>HadoopTouch_20140209</name>
+    <name>hadoopstack</name>
     <packaging>pom</packaging>
 
     <dependencies>
