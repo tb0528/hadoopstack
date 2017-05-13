@@ -1,4 +1,4 @@
-package com.xiaoxiaomo.practice.mr;
+package com.xiaoxiaomo.hadoop.mr;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
