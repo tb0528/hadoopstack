@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+<property>
+        <name>hbase.tmp.dir</name>
+        <value>/opt/hbase-0.98.8/repo/tmp</value>
+</property>
+<property >
+        <name>hbase.rootdir</name>
+     <value>hdfs://xxo07:9000/hbase</value>
+</property>
+
+<property >
+        <name>hbase.cluster.distributed</name>
+        <value>true</value>
+</property>
+<property>
+        <name>hbase.zookeeper.quorum</name>
+        <value>xxo07</value>
+</property>
+<property>
+    <name>hbase.zookeeper.property.dataDir</name>
+    <value>/opt/hbase-0.98.8/repo/zk</value>
+</property>
+<property>
+	<name>hbase.hregion.max.filesize</name>
+	<value>10485760</value>
+</property>
+<property>
+	<name>hbase.hregion.memstore.flush.size</name>
+	<value>1048576</value>
+</property>
+<property>
+    <name>hbase.coprocessor.master.classes</name>
+    <value></value>
+</property>
+<property>
+    <name>hbase.coprocessor.region.classes</name>
+    <value></value>
+</property>
+</configuration>
