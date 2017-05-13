@@ -13,6 +13,7 @@
         <module>storm</module>
         <module>hbase</module>
         <module>hive</module>
+        <module>redis</module>
     </modules>
     <name>hadoopstack</name>
     <packaging>pom</packaging>
