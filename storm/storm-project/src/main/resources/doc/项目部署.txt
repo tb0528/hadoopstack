@@ -1,0 +1,15 @@
+项目部署
+flume+kafka+zookeeper+storm+hbase+mysql
+
+1：flume：有多少个爬虫节点就部署多少台flume节点。每个flume只负责收集本节点的数据
+2：kafka：使用集群模式：5台
+3：zookeeper：集群模式：5台
+4：storm：集群模式：5台(前期3台即可)
+5：hbase：集群模式：5台
+6：mysql：主从，做主备，【mysql数据集市，表示是mysql集群的意思。】
+
+7：webui：部署一个即可
+8：hbase的消费者，部署一个即可。
+
+
+

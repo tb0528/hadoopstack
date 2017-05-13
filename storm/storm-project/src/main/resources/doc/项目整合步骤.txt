@@ -1,0 +1,153 @@
+
+项目整合的时候分开整合
+log4j+flume
+1：在爬虫项目中写一个测试类，写一个测试方法，模拟产生日志数据
+	@Test
+	public void testLog() throws Exception {
+		logger.info("当前时间戳:{}",System.currentTimeMillis());
+	}
+	
+2：修改log4j的配置文件
+log4j.rootLogger=info,flume
+
+log4j.appender.flume = org.apache.flume.clients.log4jappender.Log4jAppender
+log4j.appender.flume.Hostname = 192.168.1.171
+log4j.appender.flume.Port = 41414
+log4j.appender.flume.UnsafeMode = true
+
+
+需要在pom中添加appender的依赖：
+<!-- log4jAppender -->
+<dependency>
+	<groupId>org.apache.flume.flume-ng-clients</groupId>
+	<artifactId>flume-ng-log4jappender</artifactId>
+	<version>1.6.0</version>
+</dependency>
+3：修改flume的配置文件：
+vi flume-conf.properties
+	
+agent1.channels = ch1
+agent1.sources = avro-source1
+agent1.sinks = log-sink1
+
+# 定义channel
+agent1.channels.ch1.type = memory
+
+# 定义source
+agent1.sources.avro-source1.channels = ch1
+agent1.sources.avro-source1.type = avro
+agent1.sources.avro-source1.bind = 0.0.0.0
+agent1.sources.avro-source1.port = 41414
+
+# 定义sink
+agent1.sinks.log-sink1.channel = ch1
+agent1.sinks.log-sink1.type = logger
+
+	注意：41414 这个端口号需要和log4j配置文件中指定的端口号一致
+	
+4：启动flume
+	bin/flume-ng agent --conf conf --conf-file conf/flume-conf.properties --name agent1 -Dflume.root.logger=INFO,console
+	
+5：验证lof4j和flume整合
+	修改log4j中的方法，加上while循环
+	@Test
+	public void testLog() throws Exception {
+		while(true){
+			logger.info("当前时间戳:{}",System.currentTimeMillis());
+			SleepUtils.sleep(1000);
+		}
+	}
+	主要在flume的控制台上看到日志不停打印。
+
+	
+
+	
+log4j+flume+kafka
+6：启动kafka集群：kafka_2.11-0.8.2.2
+	启动：
+	bin/kafka-server-start.sh -daemon config/server.properties 
+	查看所有主题
+	bin/kafka-topics.sh --zookeeper localhost:2181 --list
+	创建主题：
+	bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic spider1
+	创建消费者：
+	bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic spider1 --from-beginning
+
+7：修改flume的配置文件
+vi flume-conf.properties
+
+
+agent1.channels = ch1
+agent1.sources = avro-source1
+agent1.sinks = log-sink1
+
+# 定义channel
+agent1.channels.ch1.type = memory
+
+# 定义source
+agent1.sources.avro-source1.channels = ch1
+agent1.sources.avro-source1.type = avro
+agent1.sources.avro-source1.bind = 0.0.0.0
+agent1.sources.avro-source1.port = 41414
+
+# 定义sink
+agent1.sinks.log-sink1.channel = ch1
+agent1.sinks.log-sink1.type = org.apache.flume.sink.kafka.KafkaSink
+agent1.sinks.log-sink1.topic = spider1
+agent1.sinks.log-sink1.brokerList = 192.168.1.172:9092
+agent1.sinks.log-sink1.requiredAcks = 1
+agent1.sinks.log-sink1.batchSize = 1
+
+然后重新启动flume
+
+8：验证flume和kafka
+	查看kafka的消费者，只要能看到日志输出就说明整合成功。
+
+	
+	
+kafka和storm整合
+9：创建storm项目
+	注意：
+		添加storm-kafka的依赖
+			<dependency>
+				<groupId>org.apache.storm</groupId>
+				<artifactId>storm-core</artifactId>
+				<version>0.9.3</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.storm</groupId>
+				<artifactId>storm-kafka</artifactId>
+				<version>0.9.3</version>
+			</dependency>
+		添加kafka的依赖
+			
+		过滤掉kafka中的log4j实现类的依赖
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka_2.11</artifactId>
+			<version>0.8.2.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+      				<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		
+		
+		其中kafkaspout的配置如下：
+			//其实是指定kafka集群的地址，在这指定zk的地址也可以动态获取kafka的地址
+			BrokerHosts hosts = new ZkHosts("192.168.1.171:2181,192.168.1.172:2181,192.168.1.173:2181");
+			//指定主题
+			String topic = "spider1";
+			//指定一个节点目录，zk会在根目录下创建这个节点,最终会在这个节点下面保存从kafka中消费数据的位置等信息
+			String zkRoot = "/kafkaSpout1";//会在storm使用的zk集群中创建这个根节点
+			//类似于kafka中的groupid
+			String id = "234";
+			SpoutConfig spoutConf = new SpoutConfig(hosts, topic, zkRoot, id);
+			
+10：验证
+	只要storm项目能打印出来数据就说明整个流程跑通了。
+	
+	

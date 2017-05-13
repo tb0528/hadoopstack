@@ -1,0 +1,122 @@
+由于flume1.5.2中没有提供kafkasink，所以需要自定义
+1：查看flume的开发文档，找到sink的位置，提供的有自定义sink的代码，参考文档中的代码完善kafkasink。
+
+2：自定义类kafkasink
+具体代码如下：
+package com.xxo.kafka;
+
+import java.util.Properties;
+
+import kafka.javaapi.producer.Producer;
+import kafka.producer.KeyedMessage;
+import kafka.producer.ProducerConfig;
+import kafka.serializer.StringEncoder;
+
+import org.apache.flume.Channel;
+import org.apache.flume.Context;
+import org.apache.flume.Event;
+import org.apache.flume.EventDeliveryException;
+import org.apache.flume.Transaction;
+import org.apache.flume.conf.Configurable;
+import org.apache.flume.sink.AbstractSink;
+
+public class KafkaSink extends AbstractSink implements Configurable {
+	private Producer<String, String> producer;
+	/**
+	 * 初始化方法，只会执行一次
+	 */
+	@Override
+	public void configure(Context context) {
+		Properties prop = new Properties();
+		prop.put("metadata.broker.list", "192.168.1.172:9092");
+		prop.put("serializer.class", StringEncoder.class.getName());
+
+		ProducerConfig producerConfig = new ProducerConfig(prop );
+		producer = new Producer<String,String>(producerConfig);
+	}
+
+	@Override
+	public void start() {
+	}
+
+	@Override
+	public void stop() {
+	}
+
+	/**
+	 * 主要是这个方法，负责向外写数据
+	 */
+	@Override
+	public Status process() throws EventDeliveryException {
+		Status status = null;
+		// 开启管道
+		Channel ch = getChannel();
+		// 获取、开启事务
+		Transaction txn = ch.getTransaction();
+		txn.begin();
+		try {
+			//从channel中获取一个event， 数据是封装到这个event中
+			Event event = ch.take();
+			//针对event等于null的情况进行判断
+			if(event==null){
+				txn.rollback();
+				status = Status.BACKOFF;
+				return status;
+			}
+			KeyedMessage<String, String> message = new KeyedMessage<String, String>("spider1", new String(event.getBody()));
+			producer.send(message);
+			txn.commit();
+			status = Status.READY;
+		} catch (Throwable t) {
+			txn.rollback();
+			// Log exception, handle individual exceptions as needed
+			status = Status.BACKOFF;
+			// re-throw all Errors
+			if (t instanceof Error) {
+				throw (Error) t;
+			}
+		} finally {
+			txn.close();
+		}
+		return status;
+	}
+}
+
+
+
+3：在写这个代码的时候需要添加flume的依赖：
+	<dependency>
+			<groupId>org.apache.flume</groupId>
+			<artifactId>flume-ng-core</artifactId>
+			<version>1.5.2</version>
+		</dependency>
+
+
+4：然后把kafkasink这个类导出成一个jar包。
+
+5：把这个jar包上传到flume1.5.2的lib目录下
+
+6：修改flume的配置文件如下：
+agent1.channels = ch1
+agent1.sources = avro-source1
+agent1.sinks = log-sink1
+
+# 定义channel
+agent1.channels.ch1.type = memory
+
+# 定义source
+agent1.sources.avro-source1.channels = ch1
+agent1.sources.avro-source1.type = avro
+agent1.sources.avro-source1.bind = 0.0.0.0
+agent1.sources.avro-source1.port = 41414
+
+# 定义sink，
+agent1.sinks.log-sink1.channel = ch1
+agent1.sinks.log-sink1.type = com.xxo.kafka.KafkaSink
+#注意，在这指定的是自定义kafkasink类的全类名
+
+7：由于缺少kafka的依赖，最靠谱的是把kafka_2.11-0.8.2.2/lib目录下的所有jar包都拷贝到flume1.5.2的lib目录下
+	cp kafka_2.11-0.8.2.2/lib/*.jar flume1.5.2/lib
+8：启动agent服务即可。
+
+
