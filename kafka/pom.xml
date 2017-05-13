@@ -15,6 +15,7 @@
         <module>kafka-common</module>
         <module>kafka-produce</module>
         <module>kafka-consumer</module>
+        <module>kafka-flume</module>
     </modules>
 
 
