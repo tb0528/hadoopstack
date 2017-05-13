@@ -1,4 +1,4 @@
-package com.xiaoxiaomo.kafka.common;
+package com.xiaoxiaomo.kafka.common.project;
 
 import kafka.javaapi.producer.Producer;
 import kafka.producer.KeyedMessage;

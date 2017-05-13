@@ -1,4 +1,4 @@
-package com.xiaoxiaomo.kafka.common;
+package com.xiaoxiaomo.kafka.common.project;
 
 import kafka.consumer.Consumer;
 import kafka.consumer.ConsumerConfig;
