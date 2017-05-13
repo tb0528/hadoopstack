@@ -1,4 +1,4 @@
-# HadoopTouch_20140209
+# hadoopstack
 Hadoop 练习项目
 
 # 博客地址
