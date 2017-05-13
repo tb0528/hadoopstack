@@ -1,4 +1,4 @@
-# HiveTouch_20150529
+# hive
 Hive 源码分析及api学习
 
 # 博客地址

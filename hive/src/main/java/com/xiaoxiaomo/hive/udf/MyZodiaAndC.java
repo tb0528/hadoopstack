@@ -1,11 +1,11 @@
 package com.xiaoxiaomo.hive.udf;
 
-import java.sql.Date;
-import java.util.Calendar;
-
 import org.apache.hadoop.hive.ql.exec.UDF;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
+
+import java.sql.Date;
+import java.util.Calendar;
 
 public class MyZodiaAndC extends UDF{
 	
