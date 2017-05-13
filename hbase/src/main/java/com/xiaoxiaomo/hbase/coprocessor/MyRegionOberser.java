@@ -1,7 +1,6 @@
 package com.xiaoxiaomo.hbase.coprocessor;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.hadoop.hbase.Cell;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.client.Durability;
 import org.apache.hadoop.hbase.client.HTable;

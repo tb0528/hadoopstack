@@ -1,11 +1,11 @@
 package com.xiaoxiaomo.hbase.pro.utils;
 
 
-import java.util.List;
-
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
+
+import java.util.List;
 
 public class RedisUtils {
 	public static String start_url = "start_url";

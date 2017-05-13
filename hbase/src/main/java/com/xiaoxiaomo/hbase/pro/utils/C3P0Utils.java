@@ -1,7 +1,10 @@
 package com.xiaoxiaomo.hbase.pro.utils;
 
-import java.sql.*;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 /**
  * c3p0连接池用法

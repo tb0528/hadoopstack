@@ -1,15 +1,15 @@
 package com.xiaoxiaomo.hbase.pro.utils;
 
+import org.apache.commons.dbutils.BasicRowProcessor;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.ArrayListHandler;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.dbutils.BasicRowProcessor;
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.ArrayListHandler;
 
 public final class MyDbUtils {// 拒绝继承
 	private static String className = "com.mysql.jdbc.Driver";
