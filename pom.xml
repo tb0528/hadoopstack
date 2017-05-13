@@ -12,6 +12,7 @@
         <module>kafka</module>
         <module>storm</module>
         <module>hbase</module>
+        <module>hive</module>
     </modules>
     <name>hadoopstack</name>
     <packaging>pom</packaging>
