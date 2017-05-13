@@ -1,0 +1,4 @@
+1	1	hebei
+2	2	gansu
+3	3	bj
+4	1	beijing

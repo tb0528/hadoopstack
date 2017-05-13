@@ -1,0 +1,131 @@
+<PERFLOG method=Driver.run from=org.apache.hadoop.hive.ql.Driver>
+<PERFLOG method=TimeToSubmit from=org.apache.hadoop.hive.ql.Driver>
+     Concurrency mode is disabled, not creating a lock manager
+<PERFLOG method=compile from=org.apache.hadoop.hive.ql.Driver>
+<PERFLOG method=parse from=org.apache.hadoop.hive.ql.Driver>
+   Parsing command: select * from t_5 order by id
+   Parse Completed
+</PERFLOG method=parse start=1464503172611 end=1464503172613 duration=2 from=org.apache.hadoop.hive.ql.Driver>
+<PERFLOG method=semanticAnalyze from=org.apache.hadoop.hive.ql.Driver>
+   Starting Semantic Analysis
+   Completed phase 1 of Semantic Analysis
+   Get metadata for source tables
+   0: get_table : db=xxo tbl=t_5
+   ugi=root	ip=unknown-ip-addr	cmd=get_table : db=xxo tbl=t_5
+   Get metadata for subqueries
+   Get metadata for destination tables
+   New scratch dir is hdfs://xxo07:9000/tmp/hive/root/9d2c112b-118e-46a1-8a08-c60c5bbc6fe0/hive_2016-05-29_14-26-12_611_2648166283911131981-1
+   Completed getting MetaData in Semantic Analysis
+   Set stats collection dir : hdfs://xxo07:9000/tmp/hive/root/9d2c112b-118e-46a1-8a08-c60c5bbc6fe0/hive_2016-05-29_14-26-12_611_2648166283911131981-1/-ext-10002
+   Processing for FS(4)
+   Processing for SEL(3)
+   Processing for RS(2)
+   Processing for SEL(1)
+   Processing for TS(0)
+   RS 2 oldColExprMap: {VALUE._col1=Column[_col2], VALUE._col0=Column[_col1], KEY.reducesinkkey0=Column[_col0]}
+   RS 2 newColExprMap: {VALUE._col1=Column[_col2], VALUE._col0=Column[_col1], KEY.reducesinkkey0=Column[_col0]}
+<PERFLOG method=partition-retrieving from=org.apache.hadoop.hive.ql.optimizer.ppr.PartitionPruner>
+   0: get_partitions : db=xxo tbl=t_5
+   ugi=root	ip=unknown-ip-addr	cmd=get_partitions : db=xxo tbl=t_5
+</PERFLOG method=partition-retrieving start=1464503172762 end=1464503172819 duration=57 from=org.apache.hadoop.hive.ql.optimizer.ppr.PartitionPruner>
+   Looking for table scans where optimization is applicable
+   Found 0 null table scans
+   Looking for table scans where optimization is applicable
+   Found 0 null table scans
+   Looking for table scans where optimization is applicable
+   Found 0 null table scans
+Completed plan generation
+     Semantic Analysis Completed
+</PERFLOG method=semanticAnalyze start=1464503172613 end=1464503172841 duration=228 from=org.apache.hadoop.hive.ql.Driver>
+   Initializing Self OP[5]
+   Operator 5 OP initialized
+   Initialization Done 5 OP
+   Returning Hive schema: Schema(fieldSchemas:[FieldSchema(name:t_5.id, type:int, comment:null), FieldSchema(name:t_5.dt, type:date, comment:null), FieldSchema(name:t_5.city, type:string, comment:null)], properties:null)
+</PERFLOG method=compile start=1464503172610 end=1464503172850 duration=240 from=org.apache.hadoop.hive.ql.Driver>
+<PERFLOG method=Driver.execute from=org.apache.hadoop.hive.ql.Driver>
+   Starting command: select * from t_5 order by id
+   Query ID = root_20160529142626_a68f490b-4e9f-43c7-a3b8-d16210751de7
+   Total jobs = 1
+</PERFLOG method=TimeToSubmit start=1464503172610 end=1464503172854 duration=244 from=org.apache.hadoop.hive.ql.Driver>
+<PERFLOG method=runTasks from=org.apache.hadoop.hive.ql.Driver>
+<PERFLOG method=task.MAPRED.Stage-1 from=org.apache.hadoop.hive.ql.Driver>
+   Launching Job 1 out of 1
+   Starting task [Stage-1:MAPRED] in serial mode
+   Number of reduce tasks determined at compile time: 1
+   In order to change the average load for a reducer (in bytes):
+   set hive.exec.reducers.bytes.per.reducer=<number>
+   In order to limit the maximum number of reducers:
+   set hive.exec.reducers.max=<number>
+   In order to set a constant number of reducers:
+   set mapreduce.job.reduces=<number>
+   New scratch dir is hdfs://xxo07:9000/tmp/hive/root/9d2c112b-118e-46a1-8a08-c60c5bbc6fe0/hive_2016-05-29_14-26-12_611_2648166283911131981-1
+   Using org.apache.hadoop.hive.ql.io.CombineHiveInputFormat
+   Processing alias t_5
+   Adding input file hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=bj
+   Content Summary not cached for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=bj
+   Adding input file hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=cq
+   Content Summary not cached for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=cq
+   Adding input file hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=hz
+   Content Summary not cached for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=hz
+   Adding input file hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=wz
+   Content Summary not cached for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=wz
+   Adding input file hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=yy
+   Content Summary not cached for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=yy
+   Adding input file hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2016-05-28/city=cq
+   Content Summary not cached for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2016-05-28/city=cq
+   Adding input file hdfs://xxo07:9000/user/hive/warehouse/t_1/t_1.txt
+   Content Summary not cached for hdfs://xxo07:9000/user/hive/warehouse/t_1/t_1.txt
+   Changed input file to hdfs://xxo07:9000/tmp/hive/root/9d2c112b-118e-46a1-8a08-c60c5bbc6fe0/hive_2016-05-29_14-26-12_611_2648166283911131981-1/-mr-10003/0
+   New scratch dir is hdfs://xxo07:9000/tmp/hive/root/9d2c112b-118e-46a1-8a08-c60c5bbc6fe0/hive_2016-05-29_14-26-12_611_2648166283911131981-1
+<PERFLOG method=serializePlan from=org.apache.hadoop.hive.ql.exec.Utilities>
+   Serializing MapWork via kryo
+</PERFLOG method=serializePlan start=1464503172964 end=1464503173007 duration=43 from=org.apache.hadoop.hive.ql.exec.Utilities>
+<PERFLOG method=serializePlan from=org.apache.hadoop.hive.ql.exec.Utilities>
+   Serializing ReduceWork via kryo
+</PERFLOG method=serializePlan start=1464503173015 end=1464503173148 duration=133 from=org.apache.hadoop.hive.ql.exec.Utilities>
+   Connecting to ResourceManager at xxo07/192.168.33.72:8032
+   Connecting to ResourceManager at xxo07/192.168.33.72:8032
+   Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+<PERFLOG method=getSplits from=org.apache.hadoop.hive.ql.io.CombineHiveInputFormat>
+   CombineHiveInputSplit creating pool for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=bj; using filter path hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=bj
+   CombineHiveInputSplit: pool is already created for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=cq; using filter path hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=cq
+   CombineHiveInputSplit: pool is already created for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=hz; using filter path hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=hz
+   CombineHiveInputSplit: pool is already created for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=wz; using filter path hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=wz
+   CombineHiveInputSplit: pool is already created for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=yy; using filter path hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=yy
+   CombineHiveInputSplit: pool is already created for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2016-05-28/city=cq; using filter path hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2016-05-28/city=cq
+   CombineHiveInputSplit: pool is already created for hdfs://xxo07:9000/tmp/hive/root/9d2c112b-118e-46a1-8a08-c60c5bbc6fe0/hive_2016-05-29_14-26-12_611_2648166283911131981-1/-mr-10003/0; using filter path hdfs://xxo07:9000/tmp/hive/root/9d2c112b-118e-46a1-8a08-c60c5bbc6fe0/hive_2016-05-29_14-26-12_611_2648166283911131981-1/-mr-10003/0
+   Total input paths to process : 7
+   DEBUG: Terminated node allocation with : CompletedNodes: 1, size left: 0
+   number of splits 2
+</PERFLOG method=getSplits start=1464503174738 end=1464503174933 duration=195 from=org.apache.hadoop.hive.ql.io.CombineHiveInputFormat>
+   Number of all splits 2
+   number of splits:2
+   Submitting tokens for job: job_1464498685344_0004
+   Submitted application application_1464498685344_0004
+   The url to track the job: http://xxo07:8088/proxy/application_1464498685344_0004/
+   Starting Job = job_1464498685344_0004, Tracking URL = http://xxo07:8088/proxy/application_1464498685344_0004/
+   Kill Command = /usr/local/hadoop-2.6.0/bin/hadoop job  -kill job_1464498685344_0004
+   Hadoop job information for Stage-1: number of mappers: 2; number of reducers: 1
+   Group org.apache.hadoop.mapred.Task$Counter is deprecated. Use org.apache.hadoop.mapreduce.TaskCounter instead
+   2016-05-29 14:26:30,745 Stage-1 map = 0%,  reduce = 0%
+   2016-05-29 14:27:53,143 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.72 sec
+   2016-05-29 14:28:20,569 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 8.3 sec
+   MapReduce Total cumulative CPU time: 8 seconds 300 msec
+   Ended Job = job_1464498685344_0004
+   Moving tmp dir: hdfs://xxo07:9000/tmp/hive/root/9d2c112b-118e-46a1-8a08-c60c5bbc6fe0/hive_2016-05-29_14-26-12_611_2648166283911131981-1/_tmp.-ext-10001 to: hdfs://xxo07:9000/tmp/hive/root/9d2c112b-118e-46a1-8a08-c60c5bbc6fe0/hive_2016-05-29_14-26-12_611_2648166283911131981-1/-ext-10001
+</PERFLOG method=runTasks start=1464503172855 end=1464503303027 duration=130172 from=org.apache.hadoop.hive.ql.Driver>
+</PERFLOG method=Driver.execute start=1464503172850 end=1464503303049 duration=130199 from=org.apache.hadoop.hive.ql.Driver>
+   MapReduce Jobs Launched:
+   Stage-Stage-1: Map: 2  Reduce: 1   Cumulative CPU: 8.3 sec   HDFS Read: 1028 HDFS Write: 160 SUCCESS
+   Total MapReduce CPU Time Spent: 8 seconds 300 msec
+   OK
+<PERFLOG method=releaseLocks from=org.apache.hadoop.hive.ql.Driver>
+</PERFLOG method=releaseLocks start=1464503303086 end=1464503303087 duration=1 from=org.apache.hadoop.hive.ql.Driver>
+</PERFLOG method=Driver.run start=1464503172609 end=1464503303087 duration=130478 from=org.apache.hadoop.hive.ql.Driver>
+   mapred.input.dir is deprecated. Instead, use mapreduce.input.fileinputformat.inputdir
+   Total input paths to process : 1
+   5 finished. closing...
+   5 Close done
+   Time taken: 130.479 seconds, Fetched: 10 row(s)
+<PERFLOG method=releaseLocks from=org.apache.hadoop.hive.ql.Driver>
+</PERFLOG method=releaseLocks start=1464503304801 end=1464503304802 duration=1 from=org.apache.hadoop.hive.ql.Driver>

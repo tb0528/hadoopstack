@@ -1,0 +1,131 @@
+2016-05-29 14:26:12,609 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogBegin(108)) - <PERFLOG method=Driver.run from=org.apache.hadoop.hive.ql.Driver>
+2016-05-29 14:26:12,610 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogBegin(108)) - <PERFLOG method=TimeToSubmit from=org.apache.hadoop.hive.ql.Driver>
+2016-05-29 14:26:12,610 INFO  [main]: ql.Driver (Driver.java:checkConcurrency(155)) - Concurrency mode is disabled, not creating a lock manager
+2016-05-29 14:26:12,610 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogBegin(108)) - <PERFLOG method=compile from=org.apache.hadoop.hive.ql.Driver>
+2016-05-29 14:26:12,611 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogBegin(108)) - <PERFLOG method=parse from=org.apache.hadoop.hive.ql.Driver>
+2016-05-29 14:26:12,611 INFO  [main]: parse.ParseDriver (ParseDriver.java:parse(185)) - Parsing command: select * from t_5 order by id 
+2016-05-29 14:26:12,612 INFO  [main]: parse.ParseDriver (ParseDriver.java:parse(206)) - Parse Completed
+2016-05-29 14:26:12,613 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogEnd(135)) - </PERFLOG method=parse start=1464503172611 end=1464503172613 duration=2 from=org.apache.hadoop.hive.ql.Driver>
+2016-05-29 14:26:12,613 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogBegin(108)) - <PERFLOG method=semanticAnalyze from=org.apache.hadoop.hive.ql.Driver>
+2016-05-29 14:26:12,613 INFO  [main]: parse.SemanticAnalyzer (SemanticAnalyzer.java:analyzeInternal(9961)) - Starting Semantic Analysis
+2016-05-29 14:26:12,614 INFO  [main]: parse.SemanticAnalyzer (SemanticAnalyzer.java:analyzeInternal(10000)) - Completed phase 1 of Semantic Analysis
+2016-05-29 14:26:12,614 INFO  [main]: parse.SemanticAnalyzer (SemanticAnalyzer.java:getMetaData(1554)) - Get metadata for source tables
+2016-05-29 14:26:12,614 INFO  [main]: metastore.HiveMetaStore (HiveMetaStore.java:logInfo(713)) - 0: get_table : db=xxo tbl=t_5
+2016-05-29 14:26:12,615 INFO  [main]: HiveMetaStore.audit (HiveMetaStore.java:logAuditEvent(339)) - ugi=root	ip=unknown-ip-addr	cmd=get_table : db=xxo tbl=t_5	
+2016-05-29 14:26:12,694 INFO  [main]: parse.SemanticAnalyzer (SemanticAnalyzer.java:getMetaData(1702)) - Get metadata for subqueries
+2016-05-29 14:26:12,694 INFO  [main]: parse.SemanticAnalyzer (SemanticAnalyzer.java:getMetaData(1726)) - Get metadata for destination tables
+2016-05-29 14:26:12,719 INFO  [main]: ql.Context (Context.java:getMRScratchDir(266)) - New scratch dir is hdfs://xxo07:9000/tmp/hive/root/9d2c112b-118e-46a1-8a08-c60c5bbc6fe0/hive_2016-05-29_14-26-12_611_2648166283911131981-1
+2016-05-29 14:26:12,719 INFO  [main]: parse.SemanticAnalyzer (SemanticAnalyzer.java:analyzeInternal(10003)) - Completed getting MetaData in Semantic Analysis
+2016-05-29 14:26:12,724 INFO  [main]: parse.SemanticAnalyzer (SemanticAnalyzer.java:genFileSinkPlan(6412)) - Set stats collection dir : hdfs://xxo07:9000/tmp/hive/root/9d2c112b-118e-46a1-8a08-c60c5bbc6fe0/hive_2016-05-29_14-26-12_611_2648166283911131981-1/-ext-10002
+2016-05-29 14:26:12,747 INFO  [main]: ppd.OpProcFactory (OpProcFactory.java:process(771)) - Processing for FS(4)
+2016-05-29 14:26:12,749 INFO  [main]: ppd.OpProcFactory (OpProcFactory.java:process(771)) - Processing for SEL(3)
+2016-05-29 14:26:12,749 INFO  [main]: ppd.OpProcFactory (OpProcFactory.java:process(771)) - Processing for RS(2)
+2016-05-29 14:26:12,750 INFO  [main]: ppd.OpProcFactory (OpProcFactory.java:process(771)) - Processing for SEL(1)
+2016-05-29 14:26:12,750 INFO  [main]: ppd.OpProcFactory (OpProcFactory.java:process(390)) - Processing for TS(0)
+2016-05-29 14:26:12,754 INFO  [main]: optimizer.ColumnPrunerProcFactory (ColumnPrunerProcFactory.java:pruneReduceSinkOperator(761)) - RS 2 oldColExprMap: {VALUE._col1=Column[_col2], VALUE._col0=Column[_col1], KEY.reducesinkkey0=Column[_col0]}
+2016-05-29 14:26:12,758 INFO  [main]: optimizer.ColumnPrunerProcFactory (ColumnPrunerProcFactory.java:pruneReduceSinkOperator(812)) - RS 2 newColExprMap: {VALUE._col1=Column[_col2], VALUE._col0=Column[_col1], KEY.reducesinkkey0=Column[_col0]}
+2016-05-29 14:26:12,762 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogBegin(108)) - <PERFLOG method=partition-retrieving from=org.apache.hadoop.hive.ql.optimizer.ppr.PartitionPruner>
+2016-05-29 14:26:12,767 INFO  [main]: metastore.HiveMetaStore (HiveMetaStore.java:logInfo(713)) - 0: get_partitions : db=xxo tbl=t_5
+2016-05-29 14:26:12,767 INFO  [main]: HiveMetaStore.audit (HiveMetaStore.java:logAuditEvent(339)) - ugi=root	ip=unknown-ip-addr	cmd=get_partitions : db=xxo tbl=t_5	
+2016-05-29 14:26:12,819 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogEnd(135)) - </PERFLOG method=partition-retrieving start=1464503172762 end=1464503172819 duration=57 from=org.apache.hadoop.hive.ql.optimizer.ppr.PartitionPruner>
+2016-05-29 14:26:12,829 INFO  [main]: physical.NullScanTaskDispatcher (NullScanTaskDispatcher.java:dispatch(154)) - Looking for table scans where optimization is applicable
+2016-05-29 14:26:12,833 INFO  [main]: physical.NullScanTaskDispatcher (NullScanTaskDispatcher.java:dispatch(178)) - Found 0 null table scans
+2016-05-29 14:26:12,834 INFO  [main]: physical.NullScanTaskDispatcher (NullScanTaskDispatcher.java:dispatch(154)) - Looking for table scans where optimization is applicable
+2016-05-29 14:26:12,835 INFO  [main]: physical.NullScanTaskDispatcher (NullScanTaskDispatcher.java:dispatch(178)) - Found 0 null table scans
+2016-05-29 14:26:12,835 INFO  [main]: physical.NullScanTaskDispatcher (NullScanTaskDispatcher.java:dispatch(154)) - Looking for table scans where optimization is applicable
+2016-05-29 14:26:12,840 INFO  [main]: physical.NullScanTaskDispatcher (NullScanTaskDispatcher.java:dispatch(178)) - Found 0 null table scans
+2016-05-29 14:26:12,840 INFO  [main]: parse.SemanticAnalyzer (SemanticAnalyzer.java:analyzeInternal(10173)) - Completed plan generation
+2016-05-29 14:26:12,841 INFO  [main]: ql.Driver (Driver.java:compile(427)) - Semantic Analysis Completed
+2016-05-29 14:26:12,841 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogEnd(135)) - </PERFLOG method=semanticAnalyze start=1464503172613 end=1464503172841 duration=228 from=org.apache.hadoop.hive.ql.Driver>
+2016-05-29 14:26:12,845 INFO  [main]: exec.ListSinkOperator (Operator.java:initialize(346)) - Initializing Self OP[5]
+2016-05-29 14:26:12,846 INFO  [main]: exec.ListSinkOperator (Operator.java:initializeChildren(419)) - Operator 5 OP initialized
+2016-05-29 14:26:12,846 INFO  [main]: exec.ListSinkOperator (Operator.java:initialize(394)) - Initialization Done 5 OP
+2016-05-29 14:26:12,846 INFO  [main]: ql.Driver (Driver.java:getSchema(235)) - Returning Hive schema: Schema(fieldSchemas:[FieldSchema(name:t_5.id, type:int, comment:null), FieldSchema(name:t_5.dt, type:date, comment:null), FieldSchema(name:t_5.city, type:string, comment:null)], properties:null)
+2016-05-29 14:26:12,850 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogEnd(135)) - </PERFLOG method=compile start=1464503172610 end=1464503172850 duration=240 from=org.apache.hadoop.hive.ql.Driver>
+2016-05-29 14:26:12,850 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogBegin(108)) - <PERFLOG method=Driver.execute from=org.apache.hadoop.hive.ql.Driver>
+2016-05-29 14:26:12,851 INFO  [main]: ql.Driver (Driver.java:execute(1285)) - Starting command: select * from t_5 order by id 
+2016-05-29 14:26:12,854 INFO  [main]: ql.Driver (SessionState.java:printInfo(824)) - Query ID = root_20160529142626_a68f490b-4e9f-43c7-a3b8-d16210751de7
+2016-05-29 14:26:12,854 INFO  [main]: ql.Driver (SessionState.java:printInfo(824)) - Total jobs = 1
+2016-05-29 14:26:12,854 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogEnd(135)) - </PERFLOG method=TimeToSubmit start=1464503172610 end=1464503172854 duration=244 from=org.apache.hadoop.hive.ql.Driver>
+2016-05-29 14:26:12,855 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogBegin(108)) - <PERFLOG method=runTasks from=org.apache.hadoop.hive.ql.Driver>
+2016-05-29 14:26:12,855 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogBegin(108)) - <PERFLOG method=task.MAPRED.Stage-1 from=org.apache.hadoop.hive.ql.Driver>
+2016-05-29 14:26:12,857 INFO  [main]: ql.Driver (SessionState.java:printInfo(824)) - Launching Job 1 out of 1
+2016-05-29 14:26:12,863 INFO  [main]: ql.Driver (Driver.java:launchTask(1602)) - Starting task [Stage-1:MAPRED] in serial mode
+2016-05-29 14:26:12,867 INFO  [main]: exec.Task (SessionState.java:printInfo(824)) - Number of reduce tasks determined at compile time: 1
+2016-05-29 14:26:12,872 INFO  [main]: exec.Task (SessionState.java:printInfo(824)) - In order to change the average load for a reducer (in bytes):
+2016-05-29 14:26:12,873 INFO  [main]: exec.Task (SessionState.java:printInfo(824)) -   set hive.exec.reducers.bytes.per.reducer=<number>
+2016-05-29 14:26:12,874 INFO  [main]: exec.Task (SessionState.java:printInfo(824)) - In order to limit the maximum number of reducers:
+2016-05-29 14:26:12,877 INFO  [main]: exec.Task (SessionState.java:printInfo(824)) -   set hive.exec.reducers.max=<number>
+2016-05-29 14:26:12,878 INFO  [main]: exec.Task (SessionState.java:printInfo(824)) - In order to set a constant number of reducers:
+2016-05-29 14:26:12,878 INFO  [main]: exec.Task (SessionState.java:printInfo(824)) -   set mapreduce.job.reduces=<number>
+2016-05-29 14:26:12,880 INFO  [main]: ql.Context (Context.java:getMRScratchDir(266)) - New scratch dir is hdfs://xxo07:9000/tmp/hive/root/9d2c112b-118e-46a1-8a08-c60c5bbc6fe0/hive_2016-05-29_14-26-12_611_2648166283911131981-1
+2016-05-29 14:26:12,889 INFO  [main]: mr.ExecDriver (ExecDriver.java:execute(287)) - Using org.apache.hadoop.hive.ql.io.CombineHiveInputFormat
+2016-05-29 14:26:12,889 INFO  [main]: exec.Utilities (Utilities.java:getInputPaths(3265)) - Processing alias t_5
+2016-05-29 14:26:12,889 INFO  [main]: exec.Utilities (Utilities.java:getInputPaths(3282)) - Adding input file hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=bj
+2016-05-29 14:26:12,889 INFO  [main]: exec.Utilities (Utilities.java:isEmptyPath(2605)) - Content Summary not cached for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=bj
+2016-05-29 14:26:12,894 INFO  [main]: exec.Utilities (Utilities.java:getInputPaths(3282)) - Adding input file hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=cq
+2016-05-29 14:26:12,894 INFO  [main]: exec.Utilities (Utilities.java:isEmptyPath(2605)) - Content Summary not cached for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=cq
+2016-05-29 14:26:12,901 INFO  [main]: exec.Utilities (Utilities.java:getInputPaths(3282)) - Adding input file hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=hz
+2016-05-29 14:26:12,902 INFO  [main]: exec.Utilities (Utilities.java:isEmptyPath(2605)) - Content Summary not cached for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=hz
+2016-05-29 14:26:12,909 INFO  [main]: exec.Utilities (Utilities.java:getInputPaths(3282)) - Adding input file hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=wz
+2016-05-29 14:26:12,909 INFO  [main]: exec.Utilities (Utilities.java:isEmptyPath(2605)) - Content Summary not cached for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=wz
+2016-05-29 14:26:12,913 INFO  [main]: exec.Utilities (Utilities.java:getInputPaths(3282)) - Adding input file hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=yy
+2016-05-29 14:26:12,913 INFO  [main]: exec.Utilities (Utilities.java:isEmptyPath(2605)) - Content Summary not cached for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=yy
+2016-05-29 14:26:12,917 INFO  [main]: exec.Utilities (Utilities.java:getInputPaths(3282)) - Adding input file hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2016-05-28/city=cq
+2016-05-29 14:26:12,917 INFO  [main]: exec.Utilities (Utilities.java:isEmptyPath(2605)) - Content Summary not cached for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2016-05-28/city=cq
+2016-05-29 14:26:12,925 INFO  [main]: exec.Utilities (Utilities.java:getInputPaths(3282)) - Adding input file hdfs://xxo07:9000/user/hive/warehouse/t_1/t_1.txt
+2016-05-29 14:26:12,926 INFO  [main]: exec.Utilities (Utilities.java:isEmptyPath(2605)) - Content Summary not cached for hdfs://xxo07:9000/user/hive/warehouse/t_1/t_1.txt
+2016-05-29 14:26:12,950 INFO  [main]: exec.Utilities (Utilities.java:createDummyFileForEmptyPartition(3365)) - Changed input file to hdfs://xxo07:9000/tmp/hive/root/9d2c112b-118e-46a1-8a08-c60c5bbc6fe0/hive_2016-05-29_14-26-12_611_2648166283911131981-1/-mr-10003/0
+2016-05-29 14:26:12,951 INFO  [main]: ql.Context (Context.java:getMRScratchDir(266)) - New scratch dir is hdfs://xxo07:9000/tmp/hive/root/9d2c112b-118e-46a1-8a08-c60c5bbc6fe0/hive_2016-05-29_14-26-12_611_2648166283911131981-1
+2016-05-29 14:26:12,964 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogBegin(108)) - <PERFLOG method=serializePlan from=org.apache.hadoop.hive.ql.exec.Utilities>
+2016-05-29 14:26:12,964 INFO  [main]: exec.Utilities (Utilities.java:serializePlan(899)) - Serializing MapWork via kryo
+2016-05-29 14:26:13,007 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogEnd(135)) - </PERFLOG method=serializePlan start=1464503172964 end=1464503173007 duration=43 from=org.apache.hadoop.hive.ql.exec.Utilities>
+2016-05-29 14:26:13,015 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogBegin(108)) - <PERFLOG method=serializePlan from=org.apache.hadoop.hive.ql.exec.Utilities>
+2016-05-29 14:26:13,015 INFO  [main]: exec.Utilities (Utilities.java:serializePlan(899)) - Serializing ReduceWork via kryo
+2016-05-29 14:26:13,148 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogEnd(135)) - </PERFLOG method=serializePlan start=1464503173015 end=1464503173148 duration=133 from=org.apache.hadoop.hive.ql.exec.Utilities>
+2016-05-29 14:26:13,272 INFO  [main]: client.RMProxy (RMProxy.java:createRMProxy(98)) - Connecting to ResourceManager at xxo07/192.168.33.72:8032
+2016-05-29 14:26:13,380 INFO  [main]: client.RMProxy (RMProxy.java:createRMProxy(98)) - Connecting to ResourceManager at xxo07/192.168.33.72:8032
+2016-05-29 14:26:13,420 WARN  [main]: mapreduce.JobSubmitter (JobSubmitter.java:copyAndConfigureFiles(153)) - Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+2016-05-29 14:26:14,738 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogBegin(108)) - <PERFLOG method=getSplits from=org.apache.hadoop.hive.ql.io.CombineHiveInputFormat>
+2016-05-29 14:26:14,748 INFO  [main]: io.CombineHiveInputFormat (CombineHiveInputFormat.java:getCombineSplits(387)) - CombineHiveInputSplit creating pool for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=bj; using filter path hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=bj
+2016-05-29 14:26:14,754 INFO  [main]: io.CombineHiveInputFormat (CombineHiveInputFormat.java:getCombineSplits(392)) - CombineHiveInputSplit: pool is already created for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=cq; using filter path hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=cq
+2016-05-29 14:26:14,759 INFO  [main]: io.CombineHiveInputFormat (CombineHiveInputFormat.java:getCombineSplits(392)) - CombineHiveInputSplit: pool is already created for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=hz; using filter path hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=hz
+2016-05-29 14:26:14,764 INFO  [main]: io.CombineHiveInputFormat (CombineHiveInputFormat.java:getCombineSplits(392)) - CombineHiveInputSplit: pool is already created for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=wz; using filter path hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=wz
+2016-05-29 14:26:14,769 INFO  [main]: io.CombineHiveInputFormat (CombineHiveInputFormat.java:getCombineSplits(392)) - CombineHiveInputSplit: pool is already created for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=yy; using filter path hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2015-05-30/city=yy
+2016-05-29 14:26:14,833 INFO  [main]: io.CombineHiveInputFormat (CombineHiveInputFormat.java:getCombineSplits(392)) - CombineHiveInputSplit: pool is already created for hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2016-05-28/city=cq; using filter path hdfs://xxo07:9000/user/hive/warehouse/xxo.db/t_5/dt=2016-05-28/city=cq
+2016-05-29 14:26:14,837 INFO  [main]: io.CombineHiveInputFormat (CombineHiveInputFormat.java:getCombineSplits(392)) - CombineHiveInputSplit: pool is already created for hdfs://xxo07:9000/tmp/hive/root/9d2c112b-118e-46a1-8a08-c60c5bbc6fe0/hive_2016-05-29_14-26-12_611_2648166283911131981-1/-mr-10003/0; using filter path hdfs://xxo07:9000/tmp/hive/root/9d2c112b-118e-46a1-8a08-c60c5bbc6fe0/hive_2016-05-29_14-26-12_611_2648166283911131981-1/-mr-10003/0
+2016-05-29 14:26:14,907 INFO  [main]: input.FileInputFormat (FileInputFormat.java:listStatus(281)) - Total input paths to process : 7
+2016-05-29 14:26:14,910 INFO  [main]: input.CombineFileInputFormat (CombineFileInputFormat.java:createSplits(413)) - DEBUG: Terminated node allocation with : CompletedNodes: 1, size left: 0
+2016-05-29 14:26:14,933 INFO  [main]: io.CombineHiveInputFormat (CombineHiveInputFormat.java:getCombineSplits(442)) - number of splits 2
+2016-05-29 14:26:14,933 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogEnd(135)) - </PERFLOG method=getSplits start=1464503174738 end=1464503174933 duration=195 from=org.apache.hadoop.hive.ql.io.CombineHiveInputFormat>
+2016-05-29 14:26:14,933 INFO  [main]: io.CombineHiveInputFormat (CombineHiveInputFormat.java:getSplits(521)) - Number of all splits 2
+2016-05-29 14:26:14,998 INFO  [main]: mapreduce.JobSubmitter (JobSubmitter.java:submitJobInternal(494)) - number of splits:2
+2016-05-29 14:26:15,108 INFO  [main]: mapreduce.JobSubmitter (JobSubmitter.java:printTokens(583)) - Submitting tokens for job: job_1464498685344_0004
+2016-05-29 14:26:15,205 INFO  [main]: impl.YarnClientImpl (YarnClientImpl.java:submitApplication(251)) - Submitted application application_1464498685344_0004
+2016-05-29 14:26:15,210 INFO  [main]: mapreduce.Job (Job.java:submit(1300)) - The url to track the job: http://xxo07:8088/proxy/application_1464498685344_0004/
+2016-05-29 14:26:15,210 INFO  [main]: exec.Task (SessionState.java:printInfo(824)) - Starting Job = job_1464498685344_0004, Tracking URL = http://xxo07:8088/proxy/application_1464498685344_0004/
+2016-05-29 14:26:15,210 INFO  [main]: exec.Task (SessionState.java:printInfo(824)) - Kill Command = /usr/local/hadoop-2.6.0/bin/hadoop job  -kill job_1464498685344_0004
+2016-05-29 14:26:30,520 INFO  [main]: exec.Task (SessionState.java:printInfo(824)) - Hadoop job information for Stage-1: number of mappers: 2; number of reducers: 1
+2016-05-29 14:26:30,745 WARN  [main]: mapreduce.Counters (AbstractCounters.java:getGroup(234)) - Group org.apache.hadoop.mapred.Task$Counter is deprecated. Use org.apache.hadoop.mapreduce.TaskCounter instead
+2016-05-29 14:26:30,745 INFO  [main]: exec.Task (SessionState.java:printInfo(824)) - 2016-05-29 14:26:30,745 Stage-1 map = 0%,  reduce = 0%
+2016-05-29 14:27:53,299 INFO  [main]: exec.Task (SessionState.java:printInfo(824)) - 2016-05-29 14:27:53,143 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.72 sec
+2016-05-29 14:28:20,570 INFO  [main]: exec.Task (SessionState.java:printInfo(824)) - 2016-05-29 14:28:20,569 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 8.3 sec
+2016-05-29 14:28:21,693 INFO  [main]: exec.Task (SessionState.java:printInfo(824)) - MapReduce Total cumulative CPU time: 8 seconds 300 msec
+2016-05-29 14:28:22,255 INFO  [main]: exec.Task (SessionState.java:printInfo(824)) - Ended Job = job_1464498685344_0004
+2016-05-29 14:28:22,869 INFO  [main]: exec.FileSinkOperator (Utilities.java:mvFileToFinalPath(1805)) - Moving tmp dir: hdfs://xxo07:9000/tmp/hive/root/9d2c112b-118e-46a1-8a08-c60c5bbc6fe0/hive_2016-05-29_14-26-12_611_2648166283911131981-1/_tmp.-ext-10001 to: hdfs://xxo07:9000/tmp/hive/root/9d2c112b-118e-46a1-8a08-c60c5bbc6fe0/hive_2016-05-29_14-26-12_611_2648166283911131981-1/-ext-10001
+2016-05-29 14:28:23,027 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogEnd(135)) - </PERFLOG method=runTasks start=1464503172855 end=1464503303027 duration=130172 from=org.apache.hadoop.hive.ql.Driver>
+2016-05-29 14:28:23,049 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogEnd(135)) - </PERFLOG method=Driver.execute start=1464503172850 end=1464503303049 duration=130199 from=org.apache.hadoop.hive.ql.Driver>
+2016-05-29 14:28:23,049 INFO  [main]: ql.Driver (SessionState.java:printInfo(824)) - MapReduce Jobs Launched: 
+2016-05-29 14:28:23,067 INFO  [main]: ql.Driver (SessionState.java:printInfo(824)) - Stage-Stage-1: Map: 2  Reduce: 1   Cumulative CPU: 8.3 sec   HDFS Read: 1028 HDFS Write: 160 SUCCESS
+2016-05-29 14:28:23,068 INFO  [main]: ql.Driver (SessionState.java:printInfo(824)) - Total MapReduce CPU Time Spent: 8 seconds 300 msec
+2016-05-29 14:28:23,069 INFO  [main]: ql.Driver (SessionState.java:printInfo(824)) - OK
+2016-05-29 14:28:23,086 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogBegin(108)) - <PERFLOG method=releaseLocks from=org.apache.hadoop.hive.ql.Driver>
+2016-05-29 14:28:23,087 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogEnd(135)) - </PERFLOG method=releaseLocks start=1464503303086 end=1464503303087 duration=1 from=org.apache.hadoop.hive.ql.Driver>
+2016-05-29 14:28:23,087 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogEnd(135)) - </PERFLOG method=Driver.run start=1464503172609 end=1464503303087 duration=130478 from=org.apache.hadoop.hive.ql.Driver>
+2016-05-29 14:28:23,349 INFO  [main]: Configuration.deprecation (Configuration.java:warnOnceIfDeprecated(1049)) - mapred.input.dir is deprecated. Instead, use mapreduce.input.fileinputformat.inputdir
+2016-05-29 14:28:23,569 INFO  [main]: mapred.FileInputFormat (FileInputFormat.java:listStatus(247)) - Total input paths to process : 1
+2016-05-29 14:28:24,779 INFO  [main]: exec.ListSinkOperator (Operator.java:close(595)) - 5 finished. closing... 
+2016-05-29 14:28:24,781 INFO  [main]: exec.ListSinkOperator (Operator.java:close(613)) - 5 Close done
+2016-05-29 14:28:24,790 INFO  [main]: CliDriver (SessionState.java:printInfo(824)) - Time taken: 130.479 seconds, Fetched: 10 row(s)
+2016-05-29 14:28:24,801 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogBegin(108)) - <PERFLOG method=releaseLocks from=org.apache.hadoop.hive.ql.Driver>
+2016-05-29 14:28:24,802 INFO  [main]: log.PerfLogger (PerfLogger.java:PerfLogEnd(135)) - </PERFLOG method=releaseLocks start=1464503304801 end=1464503304802 duration=1 from=org.apache.hadoop.hive.ql.Driver>
