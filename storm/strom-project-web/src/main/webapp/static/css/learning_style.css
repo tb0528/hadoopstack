@@ -1,0 +1,78 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*公共样式*/
+body{margin:0 auto;color:#333;font-size:14px; font-family:"宋体,微软雅黑"}
+h1,h2,h3,h4,div,p,span,a,ul,li{margin:0;padding:0;list-style:none;}
+a{ text-decoration:none;color:#007ac7;}
+/*header*/
+#header{background:#464646;width:100%;height:65px; position:fixed;top:0;left:0;}
+.head{padding-top:5px;width:1150px;margin:0 auto;}
+.logo{width:110px;height:55px;float:left;}
+.denglu{width:800px;float:right;line-height:55px;color:#fff;}
+.denglu a{color:orange;}
+.denglu a:hover,.current{color:#007ac7;}
+.denglu-right{float:right;}
+/*weizhi*/
+#weizhi{width:1150px;margin:0 auto;height:40px;line-height:45px;border-bottom:2px solid #007ac7;margin-top:65px;}
+#weizhi a:hover,.current{color:orange;}
+/*main*/
+#main{width:1150px;margin:10px auto 30px; overflow:hidden;}
+.main-left{width:300px;height:500px;background:#eeeeee;float:left;}
+.main-left h2{font-size:16px;font-weight:600;color:#fff;width:280px;height:40px;line-height:40px;background:#007ac7;padding-left:20px;}
+.main-left li{height:36px;line-height:36px;with:300px;margin-top:1px;}
+.main-left li a{width:260px;height:36px;display:block;padding-left:40px;}
+.main-left li a:hover,.current{background:url(../images/learning_bk.png);color:#fff;}
+.dangqian a{background:url(../images/learning_bk.png);color:#fff;}
+
+.main-right{float:right;width:830px;min-height:500px;}
+.main-right h2{font-size:16px;height:40px;line-height:40px;border-bottom:1px solid #007ac7;}
+.xuexi-an{margin-top:10px;}
+.xuexi-an .xuexi-an-d{color:#333;font-weight:600;margin-left:10px;display:inline-block;width:60px;height:26px;line-height:26px;text-align:center;}
+/* .xuexi-an .xuexi-an-d:hover,.current{background:#007ac7;color:#fff;} */
+.xuexi-an .dangqian1{background:#007ac7;color:#fff;}
+
+.xuexi-cc{width:258px;float:left;border:1px solid #ccc;margin:20px 8px 0;}
+.xuexi-cc img{width:260px;height:180px;}
+.xuexi-cc p{width:260px;height:40px;line-height:20px;margin:8px 3px 0;overflow:hidden;}
+.xuexi-dd{width:80px;height:30px;line-height:30px;color:#fff;background:#007ac7;display:inline-block;margin:15px 0 10px 80px;text-align:center}
+
+/*footer*/
+#footer{width:100%;height:100px;background:#464646;clear:both;border-top:4px solid #007ac7;color:#fff; }
+#footer p{width:1150px;text-align:center;line-height:22px;margin-top:15px;}
+
+/*课程详情*/
+.kecheng{margin-top:10px;}
+.kecheng-img{float:left;}
+.kecheng-img img{width:180px;height:110px;}
+.kecheng-wenzi{float:left;margin-left:15px;width:620px;}
+.kecheng-wenzi h3{font-size:16px;border-bottom:1px dashed #007ac7;height:40px;line-height:40px;}
+.kecheng-wenzi h3 span{font-size:14px;color:#999;float:right;display:inline-block;font-weight:normal;}
+.kecheng-wenzi p{height:40px;line-height:40px;}
+.kecheng-wenzi p span{display:inline-block;width:100px;}
+
+.mulu{clear:both;padding-top:20px;}
+.mulu h3{width:80px;height:30px;line-height:30px;border-top:4px solid #007ac7;text-align:center;margin-bottom:5px;}
+.mulu-cc{width:770px;min-height:180px;background:#eeeeee;padding:10px 30px 0px;}
+.mulu-cc h4{font-size:16px;color:#007ac7;height:45px;line-height:45px;border-bottom:1px solid #999;}
+.mulu-cc .diyijie{font-size:14px;height:45px;line-height:45px;border-bottom:1px solid #999;padding:0 15px;}
+.mulu-cc .diyijie .guankan{background:#007ac7;width:80px;height:30px;line-height:30px;text-align:center;display:inline-block;color:#fff;float:right;margin-top:8px;}
+
+/*我的考试*/
+.kaoshi-table{width:830px;border-collapse:collapse;margin-top:10px;}
+.kaoshi-table tr{height:24px;line-height:24px;border-top:1px solid #ccc;border-left:1px solid #ccc;}
+.kaoshi-table td{text-align:center;border-bottom:1px solid #ccc;border-right:1px solid #ccc;}
+.kaoshi-table .table-title{height:30px;line-height:30px;background:#464646;color:#fff;}
+.kaoshi-table a{margin-right:10px;}
+.kaoshi-table a:hover,.current{color:orange;}
+.yeshu{margin:30px 0 0 0;text-align:center;}
+.yeshu a{display:inline-block;margin:0 5px;}
+.yeshu a:hover,.current{color:orange;}
+
+/*试题*/
+.shiti{width:830px;margin-top:10px;background:#eee;min-height:449px;}
+.shiti h3{background:#464646;color:#fff;height:45px;line-height:45px;text-align:center;font-size:16px;}
+.shiti-cc h4{font-size:14px;height:60px;line-height:60px;margin:0 50px 0;}
+.shiti-cc p{line-height:30px;margin:0 100px 0;}
+.shiti-ccc{width:400px;height:30px;margin:20px 0 0 100px;}
+.shiticc1{display:inline-block;width:60px;height:30px;line-height:30px;background:#007ac7;color:#fff;text-align:center;margin:0 7px;}

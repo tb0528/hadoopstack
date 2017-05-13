@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+     <class name="com.xiaoxiaomo.storm.core.entity.ChartConfig" table="chart_config">
+        <id name="id" type="java.lang.Integer"> 
+            <column name="id" />
+            <generator class="native" />
+        </id>
+		<property name="style" type="java.lang.String">
+            <column name="style"/>
+        </property>
+		<property name="text" type="java.lang.String">
+            <column name="text"/>
+        </property>
+		<property name="xsql" type="java.lang.String">
+            <column name="xsql"/>
+        </property>
+		<property name="ysql" type="java.lang.String">
+            <column name="ysql"/>
+        </property>
+		<property name="ylabel" type="java.lang.String">
+            <column name="ylabel"/>
+        </property>
+    </class>
+</hibernate-mapping>
+
+
+
+

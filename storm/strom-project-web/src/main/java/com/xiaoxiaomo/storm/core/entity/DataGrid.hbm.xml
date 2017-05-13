@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+     <class name="com.xiaoxiaomo.storm.core.entity.DataGrid" table="data_grid">
+        <id name="id" type="java.lang.Integer"> 
+            <column name="id" />
+            <generator class="native" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="name" />
+        </property>     
+         <property name="colums" type="java.lang.String">
+            <column name="colums" />
+        </property>   
+         <property name="tablename" type="java.lang.String">
+            <column name="tablename" />
+        </property>
+        <property name="checkvalues" type="java.lang.String">
+            <column name="checkvalues" />
+        </property>   
+    </class>
+</hibernate-mapping>
