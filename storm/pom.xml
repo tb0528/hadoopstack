@@ -15,6 +15,7 @@
     <modules>
         <module>storm-touch</module>
         <module>storm-project</module>
+        <module>strom-project-web</module>
     </modules>
 
     <properties>

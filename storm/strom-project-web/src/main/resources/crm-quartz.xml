@@ -11,7 +11,7 @@
 	http://www.springframework.org/schema/tx 
 	http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<!-- 发送给xxo的短信 -->
-	<bean id="smsQuartzForXXO" class="com.xxo.core.quartz.SmsQuartzForXXO"/>
+	<bean id="smsQuartzForXXO" class="com.xiaoxiaomo.storm.core.quartz.SmsQuartzForXXO"/>
 	<bean id="XXOJobDetail"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<!-- 调用的类 -->
@@ -35,8 +35,8 @@
 	</bean>
 	
 	
-	<!-- 发送给课程咨询的短信  -->
-	<bean id="smsQuartzForAdvisor" class="cn.superwu.utils.quartz.SmsQuartzForAdvisor"/>
+	<!-- 发送给mm的短信  -->
+	<bean id="smsQuartzForAdvisor" class="cn.xiaoxiaomo.utils.quartz.SmsQuartzForAdvisor"/>
 	<bean id="advisorJobDetail"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject">
