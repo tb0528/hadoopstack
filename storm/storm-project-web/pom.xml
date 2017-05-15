@@ -7,10 +7,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>strom-project-web</artifactId>
+    <artifactId>storm-project-web</artifactId>
     <packaging>war</packaging>
 
-    <name>strom-project-web</name>
+    <name>storm-project-web</name>
     <url>http://maven.apache.org</url>
 
     <properties>
