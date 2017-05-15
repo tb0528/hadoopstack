@@ -7,15 +7,15 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>strom</artifactId>
+    <artifactId>storm</artifactId>
     <packaging>pom</packaging>
 
-    <name>strom</name>
+    <name>storm</name>
     <url>http://maven.apache.org</url>
     <modules>
         <module>storm-touch</module>
         <module>storm-project</module>
-        <module>strom-project-web</module>
+        <module>storm-project-web</module>
     </modules>
 
     <properties>
