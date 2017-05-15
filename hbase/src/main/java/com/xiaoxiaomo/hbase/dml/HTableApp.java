@@ -83,7 +83,7 @@ public class HTableApp {
     }
 
 
-    public static void putData(HTable hTable) throws InterruptedIOException, RetriesExhaustedWithDetailsException {
+    public static void putData(HTable hTable) throws IOException {
         //测试一十万条数据插入，耗时：15164
         //测试一百万条数据插入，耗时：62242
         //测试一百万条数据插入，耗时：58238 ,设置了Durability.SKIP_WAL
