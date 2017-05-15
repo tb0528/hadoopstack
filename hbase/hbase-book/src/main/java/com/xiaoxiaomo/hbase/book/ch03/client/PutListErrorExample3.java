@@ -1,6 +1,5 @@
 package com.xiaoxiaomo.hbase.book.ch03.client;
 
-// cc PutListErrorExample3 Special error handling with lists of puts
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
@@ -13,6 +12,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * 捕获RetriesExhaustedWithDetailsException客户端报告的远程错误
+ *
+ * 客户检查有多少个操作失败，错误原因以及重试次数。
+ * 注意对于列族错误，服务端的重试次数为1（见 NoSuchColumnFamilyException:1 time）,因为这是一个不可恢复的错误类型。
+ */
 public class PutListErrorExample3 {
 
     public static void main(String[] args) throws IOException {
@@ -39,21 +45,21 @@ public class PutListErrorExample3 {
                     Bytes.toBytes("val3"));
             puts.add(put3);
 
-            // vv PutListErrorExample3
+
             try {
-                table.put(puts); // co PutListErrorExample3-1-DoPut Store multiple rows with columns into HBase.
+                table.put(puts);
             } catch (RetriesExhaustedWithDetailsException e) {
-                int numErrors = e.getNumExceptions(); // co PutListErrorExample3-2-Error Handle failed operations.
+                int numErrors = e.getNumExceptions();
                 System.out.println("Number of exceptions: " + numErrors);
                 for (int n = 0; n < numErrors; n++) {
                     System.out.println("Cause[" + n + "]: " + e.getCause(n));
                     System.out.println("Hostname[" + n + "]: " + e.getHostnamePort(n));
-                    System.out.println("Row[" + n + "]: " + e.getRow(n)); // co PutListErrorExample3-3-ErrorPut Gain access to the failed operation.
+                    System.out.println("Row[" + n + "]: " + e.getRow(n)); //access to the failed operation.
                 }
                 System.out.println("Cluster issues: " + e.mayHaveClusterIssues());
                 System.out.println("Description: " + e.getExhaustiveDescription());
             }
-            // ^^ PutListErrorExample3
+
         }
     }
 }

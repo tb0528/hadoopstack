@@ -1,7 +1,5 @@
 package com.xiaoxiaomo.hbase.book.ch03.client;
 
-// cc PutListErrorExample2 Example inserting an empty Put instance into HBase
-
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.TableName;
@@ -16,6 +14,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ *  插入一个空的Put实例
+ *
+ *
+ */
 public class PutListErrorExample2 {
 
     public static void main(String[] args) throws IOException {
@@ -30,7 +34,6 @@ public class PutListErrorExample2 {
 
         List<Put> puts = new ArrayList<Put>();
 
-        // vv PutListErrorExample2
         Put put1 = new Put(Bytes.toBytes("row1"));
         put1.addColumn(Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"),
                 Bytes.toBytes("val1"));
@@ -43,22 +46,20 @@ public class PutListErrorExample2 {
         put3.addColumn(Bytes.toBytes("colfam1"), Bytes.toBytes("qual2"),
                 Bytes.toBytes("val3"));
         puts.add(put3);
-    /*[*/
-        Put put4 = new Put(Bytes.toBytes("row2"));
-        puts.add(put4);/*]*/ // co PutListErrorExample2-1-AddErrorPut Add put with no content at all to list.
 
-    /*[*/
-        try {/*]*/
+        // 一个空的Put
+        Put put4 = new Put(Bytes.toBytes("row2"));
+        puts.add(put4);
+
+        //
+        try {
             table.put(puts);
-    /*[*/
         } catch (Exception e) {
             System.err.println("Error: " + e);
             // table.flushCommits();
-            // todo: FIX!
-      /*]*/ // co PutListErrorExample2-2-Catch Catch local exception and commit queued updates.
-    /*[*/
-        }/*]*/
-        // ^^ PutListErrorExample2
+        }
+
+
         table.close();
         connection.close();
         helper.close();
