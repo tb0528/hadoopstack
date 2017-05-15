@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.protobuf.RpcCallback;
 import com.google.protobuf.RpcController;
 import com.google.protobuf.Service;
-import coprocessor.generated.ObserverStatisticsProtos;
+import com.xiaoxiaomo.hbase.book.ch04.coprocessor.generated.ObserverStatisticsProtos;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.hbase.Cell;
