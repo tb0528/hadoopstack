@@ -1,7 +1,5 @@
 package com.xiaoxiaomo.hbase.book.ch03.client;
 
-// cc CheckAndPutExample Example application using the atomic compare-and-set operations
-
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.TableName;
@@ -14,6 +12,21 @@ import util.HBaseHelper;
 
 import java.io.IOException;
 
+/**
+ *  原子性插入操作 using the atomic compare-and-set operations.
+ *
+ *  检查相关信息，并决定是否修改数据操作，常用于账户结余，状态转换等。
+ *
+ *  注意：下面的示例4会抛出异常
+ *      因为HBase提供的compare-and-set操作，只能检查和修改同一行数据，与其他的许多操作一样，这个操作只提供同一行数据的原子性保证。
+ *      检查和修改分别针对不同行数据时会抛出异常。
+ *
+ *      这个操作十分强大，尤其是在分布式系统中，且有多个独立的客户端同时操作数据时。
+ *      通过这个方法，HBase与其他复杂的设计结构区分了开来，提供不同客户端可以并发修改数据的功能。
+ *
+ *
+ *
+ */
 public class CheckAndPutExample {
 
     public static void main(String[] args) throws IOException {
@@ -26,37 +39,39 @@ public class CheckAndPutExample {
         Connection connection = ConnectionFactory.createConnection(conf);
         Table table = connection.getTable(TableName.valueOf("testtable"));
 
-        // vv CheckAndPutExample
+        // 用例
         Put put1 = new Put(Bytes.toBytes("row1"));
-        put1.addColumn(Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"),
-                Bytes.toBytes("val1")); // co CheckAndPutExample-01-Put1 Create a new Put instance.
-
-        boolean res1 = table.checkAndPut(Bytes.toBytes("row1"),
-                Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"), null, put1); // co CheckAndPutExample-02-CAS1 Check if column does not exist and perform optional put operation.
-        System.out.println("Put 1a applied: " + res1); // co CheckAndPutExample-03-SOUT1 Print out the result, should be "Put 1a applied: true".
-
-        boolean res2 = table.checkAndPut(Bytes.toBytes("row1"),
-                Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"), null, put1); // co CheckAndPutExample-04-CAS2 Attempt to store same cell again.
-        System.out.println("Put 1b applied: " + res2); // co CheckAndPutExample-05-SOUT2 Print out the result, should be "Put 1b applied: false" as the column now already exists.
+        put1.addColumn(Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"), Bytes.toBytes("val1"));
 
         Put put2 = new Put(Bytes.toBytes("row1"));
-        put2.addColumn(Bytes.toBytes("colfam1"), Bytes.toBytes("qual2"),
-                Bytes.toBytes("val2")); // co CheckAndPutExample-06-Put2 Create another Put instance, but using a different column qualifier.
-
-        boolean res3 = table.checkAndPut(Bytes.toBytes("row1"),
-                Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"), // co CheckAndPutExample-07-CAS3 Store new data only if the previous data has been saved.
-                Bytes.toBytes("val1"), put2);
-        System.out.println("Put 2 applied: " + res3); // co CheckAndPutExample-08-SOUT3 Print out the result, should be "Put 2 applied: true" as the checked column exists.
+        put2.addColumn(Bytes.toBytes("colfam1"), Bytes.toBytes("qual2"), Bytes.toBytes("val2"));
 
         Put put3 = new Put(Bytes.toBytes("row2"));
-        put3.addColumn(Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"),
-                Bytes.toBytes("val3")); // co CheckAndPutExample-09-Put3 Create yet another Put instance, but using a different row.
+        put3.addColumn(Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"), Bytes.toBytes("val3"));
 
+        //1. 参数为null，即检查到不存在就添加put1,返回true
+        boolean res1 = table.checkAndPut(Bytes.toBytes("row1"),
+                Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"), null, put1);
+        System.out.println(res1);
+
+        //2. 再次添加，即检查到不存在就添加put1,但是已经存在。所以就不会添加返回false
+        boolean res2 = table.checkAndPut(Bytes.toBytes("row1"),
+                Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"), null, put1);
+        System.out.println(res2);
+
+
+        //3. 检查put1是否存在，存在就添加put2，返回true
+        boolean res3 = table.checkAndPut(Bytes.toBytes("row1"),
+                Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"),
+                Bytes.toBytes("val1"), put2);
+        System.out.println(res3);
+
+
+        //4. 这里会抛出异常：org.apache.hadoop.hbase.DoNotRetryIOException: Action's getRow must match the passed row
         boolean res4 = table.checkAndPut(Bytes.toBytes("row1"),
-                Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"), // co CheckAndPutExample-10-CAS4 Store new data while checking a different row.
-                Bytes.toBytes("val1"), put3);
-        System.out.println("Put 3 applied: " + res4); // co CheckAndPutExample-11-SOUT4 We will not get here as an exception is thrown beforehand!
-        // ^^ CheckAndPutExample
+                Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"), Bytes.toBytes("val1"), put3);
+
+
         table.close();
         connection.close();
         helper.close();
