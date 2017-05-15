@@ -13,7 +13,10 @@ import util.HBaseHelper;
 
 import java.io.IOException;
 
-// cc TableOperationsExample Example using the various calls to disable, enable, and check that status of a table
+/**
+ *
+ *  Example using the various calls to disable, enable, and check that status of a table
+ */
 public class TableOperationsExample {
 
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -22,53 +25,39 @@ public class TableOperationsExample {
         HBaseHelper helper = HBaseHelper.getHelper(conf);
         helper.dropTable("testtable");
 
-        // vv TableOperationsExample
-        Connection connection = ConnectionFactory.createConnection(conf);
-        Admin admin = connection.getAdmin();
+        Admin admin  = helper.getConnection().getAdmin();
 
         TableName tableName = TableName.valueOf("testtable");
+
+
+        //创建表
         HTableDescriptor desc = new HTableDescriptor(tableName);
-        HColumnDescriptor coldef = new HColumnDescriptor(
-                Bytes.toBytes("colfam1"));
-        desc.addFamily(coldef);
-        // ^^ TableOperationsExample
-        System.out.println("Creating table...");
-        // vv TableOperationsExample
+        HColumnDescriptor columnDescriptor = new HColumnDescriptor(Bytes.toBytes("colfam1"));
+//        columnDescriptor.set
+        desc.addFamily(columnDescriptor);
         admin.createTable(desc);
 
-        // ^^ TableOperationsExample
-        System.out.println("Deleting enabled table...");
-        // vv TableOperationsExample
+        //删除
         try {
             admin.deleteTable(tableName);
         } catch (IOException e) {
             System.err.println("Error deleting table: " + e.getMessage());
         }
 
-        // ^^ TableOperationsExample
-        System.out.println("Disabling table...");
-        // vv TableOperationsExample
+        //Disable
         admin.disableTable(tableName);
         boolean isDisabled = admin.isTableDisabled(tableName);
-        System.out.println("Table is disabled: " + isDisabled);
 
+        //TableAvailable
         boolean avail1 = admin.isTableAvailable(tableName);
-        System.out.println("Table available: " + avail1);
 
-        // ^^ TableOperationsExample
-        System.out.println("Deleting disabled table...");
-        // vv TableOperationsExample
+        //Delete
         admin.deleteTable(tableName);
 
+        //TableAvailable
         boolean avail2 = admin.isTableAvailable(tableName);
-        System.out.println("Table available: " + avail2);
 
-        // ^^ TableOperationsExample
-        System.out.println("Creating table again...");
-        // vv TableOperationsExample
         admin.createTable(desc);
         boolean isEnabled = admin.isTableEnabled(tableName);
-        System.out.println("Table is enabled: " + isEnabled);
-        // ^^ TableOperationsExample
     }
 }
