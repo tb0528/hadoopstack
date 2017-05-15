@@ -16,6 +16,10 @@ public class CRUDExample {
     public static void main(String[] args) throws IOException {
 
         // 加载配置
+        //1. HBaseConfiguration.create()
+        //2. HBaseConfiguration.create(Configuration that) 自己指定的优先级高
+        //3. 调用任何一个静态的create()方法，代码都会尝试使用当前的JAVA CLASSPATH 来加载两个配置文件：hbase-default.xml、hbase-site.xml
+        //4. 当然在调用HTable实例之前也可以使用代码任意的修改配置
         Configuration conf = HBaseConfiguration.create();
         HBaseHelper helper = HBaseHelper.getHelper(conf);
         try (
@@ -32,6 +36,8 @@ public class CRUDExample {
 
 
             /** put */
+            /** Bytes工具类挺好用的，其实内部实现很简单*/
+            /** Put(byte[] row, long ts) 通过ts时间戳将数据存储为一个特定的版本（数据的版本化） */
             Put put = new Put(Bytes.toBytes("row1"));
             put.addColumn(Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"), Bytes.toBytes("val1"));
             put.addColumn(Bytes.toBytes("colfam2"), Bytes.toBytes("qual2"), Bytes.toBytes("val2"));
@@ -39,6 +45,7 @@ public class CRUDExample {
 
             /** scan */
             Scan scan = new Scan();
+//            scan.setMaxVersions(1);//默认查出最新版本的数据
             ResultScanner scanner = table.getScanner(scan);
             for (Result result2 : scanner) {
                 while (result2.advance())

@@ -16,37 +16,37 @@ import java.io.IOException;
 
 public class AppendExample {
 
-  public static void main(String[] args) throws IOException {
-    Configuration conf = HBaseConfiguration.create();
+    public static void main(String[] args) throws IOException {
+        Configuration conf = HBaseConfiguration.create();
 
-    HBaseHelper helper = HBaseHelper.getHelper(conf);
-    helper.dropTable("testtable");
-    helper.createTable("testtable", 100, "colfam1", "colfam2");
-    helper.put("testtable",
-      new String[] { "row1" },
-      new String[] { "colfam1" },
-      new String[] { "qual1" },
-      new long[]   { 1 },
-      new String[] { "oldvalue" });
-    System.out.println("Before append call...");
-    helper.dump("testtable", new String[]{ "row1" }, null, null);
+        HBaseHelper helper = HBaseHelper.getHelper(conf);
+        helper.dropTable("testtable");
+        helper.createTable("testtable", 100, "colfam1", "colfam2");
+        helper.put("testtable",
+                new String[]{"row1"},
+                new String[]{"colfam1"},
+                new String[]{"qual1"},
+                new long[]{1},
+                new String[]{"oldvalue"});
+        System.out.println("Before append call...");
+        helper.dump("testtable", new String[]{"row1"}, null, null);
 
-    Connection connection = ConnectionFactory.createConnection(conf);
-    Table table = connection.getTable(TableName.valueOf("testtable"));
+        Connection connection = ConnectionFactory.createConnection(conf);
+        Table table = connection.getTable(TableName.valueOf("testtable"));
 
-    // vv AppendExample
-    Append append = new Append(Bytes.toBytes("row1"));
-    append.add(Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"),
-      Bytes.toBytes("newvalue"));
-    append.add(Bytes.toBytes("colfam1"), Bytes.toBytes("qual2"),
-      Bytes.toBytes("anothervalue"));
+        // vv AppendExample
+        Append append = new Append(Bytes.toBytes("row1"));
+        append.add(Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"),
+                Bytes.toBytes("newvalue"));
+        append.add(Bytes.toBytes("colfam1"), Bytes.toBytes("qual2"),
+                Bytes.toBytes("anothervalue"));
 
-    table.append(append);
-    // ^^ AppendExample
-    System.out.println("After append call...");
-    helper.dump("testtable", new String[]{"row1"}, null, null);
-    table.close();
-    connection.close();
-    helper.close();
-  }
+        table.append(append);
+        // ^^ AppendExample
+        System.out.println("After append call...");
+        helper.dump("testtable", new String[]{"row1"}, null, null);
+        table.close();
+        connection.close();
+        helper.close();
+    }
 }
