@@ -13,53 +13,59 @@ import java.io.IOException;
 
 public class CRUDExample {
 
-  public static void main(String[] args) throws IOException {
-    // vv CRUDExample
-    Configuration conf = HBaseConfiguration.create();
+    public static void main(String[] args) throws IOException {
 
-    // ^^ CRUDExample
-    HBaseHelper helper = HBaseHelper.getHelper(conf);
-    helper.dropTable("testtable");
-    helper.createTable("testtable", "colfam1", "colfam2");
+        // 加载配置
+        Configuration conf = HBaseConfiguration.create();
+        HBaseHelper helper = HBaseHelper.getHelper(conf);
+        try (
 
-    // vv CRUDExample
-    try (
-            Connection connection = ConnectionFactory.createConnection(conf);
-            Table table = connection.getTable(TableName.valueOf("testtable"));
-    ) {
-      Put put = new Put(Bytes.toBytes("row1"));
-      put.addColumn(Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"),
-        Bytes.toBytes("val1"));
-      put.addColumn(Bytes.toBytes("colfam2"), Bytes.toBytes("qual2"),
-        Bytes.toBytes("val2"));
-      table.put(put);
+//                Connection connection = ConnectionFactory.createConnection(conf);
+                Connection connection = helper.getConnection();
 
-      Scan scan = new Scan();
-      ResultScanner scanner = table.getScanner(scan);
-      for (Result result2 : scanner) {
-        while (result2.advance())
-          System.out.println("Cell: " + result2.current());
-      }
+                Table table = connection.getTable(TableName.valueOf("testtable"));
+        ) {
 
-      Get get = new Get(Bytes.toBytes("row1"));
-      get.addColumn(Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"));
-      Result result = table.get(get);
-      System.out.println("Get result: " + result);
-      byte[] val = result.getValue(Bytes.toBytes("colfam1"),
-        Bytes.toBytes("qual1"));
-      System.out.println("Value only: " + Bytes.toString(val));
+            /** drop create table */
+            helper.dropTable("testtable");
+            helper.createTable("testtable", "colfam1", "colfam2");
 
-      Delete delete = new Delete(Bytes.toBytes("row1"));
-      delete.addColumn(Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"));
-      table.delete(delete);
 
-      Scan scan2 = new Scan();
-      ResultScanner scanner2 = table.getScanner(scan2);
-      for (Result result2 : scanner2) {
-        System.out.println("Scan: " + result2);
-      }
+            /** put */
+            Put put = new Put(Bytes.toBytes("row1"));
+            put.addColumn(Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"), Bytes.toBytes("val1"));
+            put.addColumn(Bytes.toBytes("colfam2"), Bytes.toBytes("qual2"), Bytes.toBytes("val2"));
+            table.put(put);
+
+            /** scan */
+            Scan scan = new Scan();
+            ResultScanner scanner = table.getScanner(scan);
+            for (Result result2 : scanner) {
+                while (result2.advance())
+                    System.out.println("Cell: " + result2.current());
+            }
+
+            /** get */
+            Get get = new Get(Bytes.toBytes("row1"));
+            get.addColumn(Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"));
+            Result result = table.get(get);
+            System.out.println("Get result: " + result);
+            byte[] val = result.getValue(Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"));
+            System.out.println("Value only: " + Bytes.toString(val));
+
+            /** delete */
+            Delete delete = new Delete(Bytes.toBytes("row1"));
+            delete.addColumn(Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"));
+            table.delete(delete);
+
+            /** scan2 */
+            Scan scan2 = new Scan();
+            ResultScanner scanner2 = table.getScanner(scan2);
+            for (Result result2 : scanner2) {
+                System.out.println("Scan: " + result2);
+            }
+
+        }
+        helper.close();
     }
-    // ^^ CRUDExample
-    helper.close();
-  }
 }
