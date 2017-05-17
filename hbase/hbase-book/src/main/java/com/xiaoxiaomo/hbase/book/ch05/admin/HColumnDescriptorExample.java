@@ -39,7 +39,7 @@ public class HColumnDescriptorExample {
                 .setValue("test-key", "test-value") //METADATA
                 .setBloomFilterType(BloomType.ROWCOL);
 
-        desc.setCompressionType(Compression.Algorithm.SNAPPY);
+//        desc.setCompressionType(Compression.Algorithm.SNAPPY);    //压缩格式
         desc.setBlocksize(64);
 //        desc.setBlockCacheEnabled();
 
