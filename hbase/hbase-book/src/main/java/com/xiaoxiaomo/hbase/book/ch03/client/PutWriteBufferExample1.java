@@ -14,21 +14,30 @@ import java.io.IOException;
  *   using the client-side write buffer
  *
  *  【每一个Put操作实际上都是一个RPC操作，它将客户端数据传到服务器然后返回】
- *   这只是和小数据量的操作，如果有个应用需要每秒存储上千行数据到HBase表中就不适合。
+ *      这只是和小数据量的操作，如果有个应用需要每秒存储上千行数据到HBase表中就不适合。
  *
- *  减少独立RPC调用的关键是限制往返时间（round-trip time）,一般情况下在LRN网络中大概要花1毫秒，这意味着1秒钟只能完成1000次RPC往返相应。
- *  当然另一个重要因素就是消息大小，如果通过网络发送的请求内容较大，时间主要话费到数据传递上，这样就没有对比性。
+ *      减少独立RPC调用的关键是限制往返时间（round-trip time）,一般情况下在LRN网络中大概要花1毫秒，这意味着1秒钟只能完成1000次RPC往返相应。
+ *      当然另一个重要因素就是消息大小，如果通过网络发送的请求内容较大，时间主要话费到数据传递上，这样就没有对比性。
  *
- *  比如，像计数器这样的操作如果合并后批量提交，往返次数就减少了，性能自然会提升
+ *      比如，像计数器这样的操作如果合并后批量提交，往返次数就减少了，性能自然会提升
  *
- *  【配置】：
- *      hbase-site.xml  hbase.client.write.buffer=>20971520(2MB)
+ *  【设置是否写入缓存区】
+ *      HBase的API配置了一个客户端的写缓冲区（write buffer）,缓存区负责收集put操作，然后调用RPC操作一次性将put送往服务器，全局设置
+ *      默认：setAutoFlush(true)
+ *      设置为，false时就表示激活了缓冲区。这样可以批量写入数据到HBase，而不是有一条put就执行一次更新，只有当put填满客户端写缓存时，才实际向HBase服务端发起写请求。
  *
- *  【访问客户端写缓冲区的内容】：
+ *
+ *  【配置缓冲区大小】：
+ *      全局设置：hbase-site.xml  hbase.client.write.buffer=>20971520(2MB)
+ *      表级设置：HTable.setWriteBufferSize(writeBufferSize)
+ *      如果设置的buffer小于当前写buffer中的数据时，buffer将会被flush到服务端。
+ *
+ *
+ *  【直接访问客户端写缓冲区的内容】：
  *      ArrayList<Put> getWriteBuffer() 是线程不安全，并且访问时数据有可能在写入
  *
  *  【注意】：
- *      一个更大的全重去需要客户端和服务器端消耗更多的内存，因为服务器端也需要先将数据写入到服务器的写缓冲区中，然后再处理。
+ *      一个更大的缓冲区需要客户端和服务器端消耗更多的内存，因为服务器端也需要先将数据写入到服务器的写缓冲区中，然后再处理。
  *      另一方面，确实减少了RPC请求次数。估算服务器的内存：
  *      hbase.client.write.buffer*hbase.regionserver.handler.count*region服务的数量
  *
